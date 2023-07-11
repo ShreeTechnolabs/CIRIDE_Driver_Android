@@ -1,0 +1,167 @@
+{
+  "project_info": {
+    "project_number": "1057103931549",
+    "firebase_url": "https://vsystem-firebase-ciride-default-rtdb.firebaseio.com",
+    "project_id": "vsystem-firebase-ciride",
+    "storage_bucket": "vsystem-firebase-ciride.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057103931549:android:10b137183073e73a054c74",
+        "android_client_info": {
+          "package_name": "ciride.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057103931549-i3fi554rb8qpoljrf67otivukb24gpe2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ciride.driver",
+            "certificate_hash": "c232d60ba7dbaa2b71fe7812ee2b6390bc56101f"
+          }
+        },
+        {
+          "client_id": "1057103931549-llcir85d6ihcb0b61amnl6u1qemraksq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ciride.driver",
+            "certificate_hash": "09162e62458fd9d838ce4c3ff3708e5f47d7597a"
+          }
+        },
+        {
+          "client_id": "1057103931549-ao19dghpqqh0fjstcslgf9opedl8oq7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUpQ_A3Fg6DQ31090HzJ9vKd0mrYDEBJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057103931549-ao19dghpqqh0fjstcslgf9opedl8oq7t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1057103931549-clrulmr5987efalu8ii2djq339asskjr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ciride.driver"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057103931549:android:7d1e209f55deb0a7054c74",
+        "android_client_info": {
+          "package_name": "ciride.kiosk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057103931549-d59s8o23mle9i6d8mtfmlce1d6gn0j2q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ciride.kiosk",
+            "certificate_hash": "c232d60ba7dbaa2b71fe7812ee2b6390bc56101f"
+          }
+        },
+        {
+          "client_id": "1057103931549-q525qqbrhstvnnmosrhl4r2p5voetv1m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ciride.kiosk",
+            "certificate_hash": "e12fd70463e4c891c64ad8786fa766ade065c453"
+          }
+        },
+        {
+          "client_id": "1057103931549-ao19dghpqqh0fjstcslgf9opedl8oq7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUpQ_A3Fg6DQ31090HzJ9vKd0mrYDEBJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057103931549-ao19dghpqqh0fjstcslgf9opedl8oq7t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1057103931549-clrulmr5987efalu8ii2djq339asskjr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ciride.driver"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057103931549:android:14d778518282d2c1054c74",
+        "android_client_info": {
+          "package_name": "ciride.passenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057103931549-cj8v4dbi2bsctgt51bgs8rfbul75bhmo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ciride.passenger",
+            "certificate_hash": "09162e62458fd9d838ce4c3ff3708e5f47d7597a"
+          }
+        },
+        {
+          "client_id": "1057103931549-qsse4iqvej39tt3p8v9qdoq1cmvf0ehb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ciride.passenger",
+            "certificate_hash": "c232d60ba7dbaa2b71fe7812ee2b6390bc56101f"
+          }
+        },
+        {
+          "client_id": "1057103931549-ao19dghpqqh0fjstcslgf9opedl8oq7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUpQ_A3Fg6DQ31090HzJ9vKd0mrYDEBJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057103931549-ao19dghpqqh0fjstcslgf9opedl8oq7t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1057103931549-clrulmr5987efalu8ii2djq339asskjr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ciride.driver"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

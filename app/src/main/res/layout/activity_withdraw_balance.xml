@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f4"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar_include"
+        layout="@layout/design_toolbar_general" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+
+            android:id="@+id/topArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/appThemeColor_1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginBottom="@dimen/_40sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <com.view.MTextView
+                    android:id="@+id/walletamountTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:text="$ 0.00"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/_40ssp"
+                    app:customTypeFace="@string/systemSemiBold" />
+
+                <com.view.MTextView
+                    android:includeFontPadding="false"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:id="@+id/yourBalTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Your Balance"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/_14ssp"
+                    app:customTypeFace="@string/systemRegular" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_minus35sdp"
+            android:layout_below="@id/topArea"
+            android:layout_above="@id/bottomArea"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_8sdp"
+                android:layout_width="match_parent"
+                android:id="@+id/withDrawArea"
+                android:visibility="visible"
+                android:layout_height="@dimen/_80sdp">
+                <RelativeLayout
+                    android:padding="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.view.MTextView
+                        android:textColor="@color/appThemeColor_1"
+                        android:id="@+id/withdrawTitle"
+                        android:textSize="@dimen/_20ssp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Withdraw"
+                        app:customTypeFace="@string/systemSemiBold" />
+
+                    <com.autofit.et.lib.AutoFitEditText
+                        android:padding="@dimen/_2sdp"
+                        android:inputType="numberDecimal"
+                        android:text=""
+                        android:gravity="center"
+                       android:layout_below="@id/withdrawTitle"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/autofitEditText"
+                        android:layout_width="@dimen/_130sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_25sdp"
+                        android:visibility="visible"/>
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <ScrollView
+                android:id="@+id/scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/withdrawBalArea"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.view.MTextView
+                        android:layout_gravity="bottom"
+                        android:textSize="@dimen/_12ssp"
+                        android:maxLines="4"
+                        android:padding="@dimen/_10sdp"
+                        android:id="@+id/withdrawAmountTitle"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="NonWithdrawablemmm"
+                        app:customTypeFace="@string/systemSemiBold" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:id="@+id/helpwithdrawamount"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_gravity="center_vertical"
+                        app:srcCompat="@drawable/ic_question"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/_minus5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.cardview.widget.CardView
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="@dimen/_8sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.view.MTextView
+                                android:textColor="@color/appThemeColor_1"
+                                android:padding="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:id="@+id/withdrawAmount"
+                                android:includeFontPadding="false"
+                                android:textSize="@dimen/_18ssp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$ 0.00"
+                                app:customTypeFace="@string/systemSemiBold" />
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.view.MTextView
+                        android:layout_gravity="bottom"
+                        android:textSize="@dimen/_12ssp"
+                        android:maxLines="4"
+                        android:padding="@dimen/_10sdp"
+                        android:id="@+id/nonwithdrawAmountTitle"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="NonWithdrawablemmm"
+                        app:customTypeFace="@string/systemSemiBold" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:id="@+id/helipnonwithdrawamount"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_gravity="center_vertical"
+                        app:srcCompat="@drawable/ic_question"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="@dimen/_minus5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="@dimen/_8sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <com.view.MTextView
+                                android:textColor="@color/appThemeColor_1"
+                                android:layout_gravity="center"
+                                android:id="@+id/nonwithdrawAmount"
+                                android:includeFontPadding="false"
+                                android:textSize="@dimen/_18ssp"
+                                android:padding="@dimen/_10sdp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$ 0.00"
+                                app:customTypeFace="@string/systemSemiBold" />
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+                    <com.view.MTextView
+                        android:layout_gravity="bottom"
+                        android:textSize="@dimen/_12ssp"
+                        android:maxLines="4"
+                        android:padding="@dimen/_10sdp"
+                        android:id="@+id/accountdetailText"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="NonWithdrawablemmm"
+                        app:customTypeFace="@string/systemSemiBold" />
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginBottom="@dimen/_2sdp"
+                app:cardCornerRadius="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:paddingStart="@dimen/_4sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toStartOf="@id/buttonlayout"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:padding="@dimen/_2sdp"
+                            android:visibility="visible"
+                            app:srcCompat="@drawable/ic_bank"
+                            android:tint="#696969"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"/>
+                        <com.view.MTextView
+                            android:padding="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:id="@+id/accountHTxt"
+                            android:includeFontPadding="false"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/_18ssp"
+                            android:textColor="#696969"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="XXXXXXXXX"
+                            app:customTypeFace="@string/systemRegular" />
+
+                    </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:layout_centerInParent="true"
+                        android:id="@+id/buttonlayout"
+                        android:layout_width="@dimen/_23sdp"
+                        android:layout_height="@dimen/_23sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/roundcolorect_left"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:id="@+id/addaccountImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/_4sdp"
+                            android:tint="@color/white"
+                            app:srcCompat="@drawable/ic_pic_add" />
+                        <!-- <include
+                            android:id="@+id/changeAccountDetails"
+                            layout="@layout/btn_type_1"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            />-->
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+        </ScrollView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:id="@+id/bottomArea"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp">
+
+            <RelativeLayout
+                android:layout_marginBottom="@dimen/_minus10sdp"
+                android:layout_above="@id/buttonlayoutbutton"
+                android:id="@+id/helparea"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp">
+                <androidx.cardview.widget.CardView
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:padding="@dimen/_5sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.view.MTextView
+                            android:layout_marginStart="@dimen/_20ssp"
+                            android:textSize="@dimen/_15ssp"
+                            android:id="@+id/needhelptext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Need help?"
+                            app:customTypeFace="@string/systemSemiBold" />
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_alignParentBottom="true"
+                android:id="@+id/buttonlayoutbutton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+                <include
+                    android:id="@+id/withdrawnow"
+                    layout="@layout/btn_type_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:id="@+id/readFAQ"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/circle_shadow_big">
+
+                    <ImageView
+                        android:id="@+id/readFAQimage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/_10sdp"
+                        android:tint="@color/white"
+                        app:srcCompat="@drawable/ic_mail" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/support"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/circle_shadow_big">
+
+                    <ImageView
+                        android:id="@+id/supportimage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/_10sdp"
+                        android:tint="@color/white"
+                        app:srcCompat="@drawable/ic_question" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+        <com.view.ErrorView
+            android:id="@+id/errorView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:visibility="gone" />
+
+
+
+
+
+
+    </RelativeLayout>
+</LinearLayout>
