@@ -1201,8 +1201,8 @@ public class CabSelectionFragment extends Fragment implements CabTypeAdapter.OnI
             faredialog.setContentView(contentView);
             BottomSheetBehavior mBehavior = BottomSheetBehavior.from((View) contentView.getParent());
             mBehavior.setPeekHeight(1500);
-            View bottomSheetView = faredialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
-            BottomSheetBehavior.from(bottomSheetView).setHideable(false);
+//            View bottomSheetView = faredialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
+//            BottomSheetBehavior.from(bottomSheetView).setHideable(false);
             setCancelable(faredialog, false);
 
             ImageView imagecar = (ImageView) faredialog.findViewById(R.id.imagecar);
@@ -1308,7 +1308,7 @@ public class CabSelectionFragment extends Fragment implements CabTypeAdapter.OnI
 
 
     public void setCancelable(Dialog dialogview, boolean cancelable) {
-        final Dialog dialog = dialogview;
+        /*final Dialog dialog = dialogview;
         View touchOutsideView = dialog.getWindow().getDecorView().findViewById(R.id.touch_outside);
         View bottomSheetView = dialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
 
@@ -1322,7 +1322,7 @@ public class CabSelectionFragment extends Fragment implements CabTypeAdapter.OnI
         } else {
             touchOutsideView.setOnClickListener(null);
             BottomSheetBehavior.from(bottomSheetView).setHideable(false);
-        }
+        }*/
     }
 
     public String getAvailableCarTypesIds() {
@@ -1447,7 +1447,7 @@ public class CabSelectionFragment extends Fragment implements CabTypeAdapter.OnI
                             @Override
                             public void run() {
                                 try {
-                                    int height = (int) getResources().getDimension(R.dimen._95sdp);
+                                    int height = (int) getResources().getDimension(com.intuit.sdp.R.dimen._95sdp);
 
                                     mainAct.setPanelHeight(height);
                                 } catch (Exception e2) {
@@ -1656,7 +1656,7 @@ public class CabSelectionFragment extends Fragment implements CabTypeAdapter.OnI
         uploadImgAlertDialog.findViewById(R.id.camImgVIew).setVisibility(View.VISIBLE);
         uploadImgAlertDialog.findViewById(R.id.ic_add).setVisibility(View.VISIBLE);
 //        ((CardView) uploadImgAlertDialog.findViewById(R.id.mCardView)) .setBackgroundColor(Color.parseColor("#F1F5F8"));
-//        ((CardView) uploadImgAlertDialog.findViewById(R.id.mCardView)) .setRadius(R.dimen._12sdp);
+//        ((CardView) uploadImgAlertDialog.findViewById(R.id.mCardView)) .setRadius(com.intuit.sdp.R.dimen._12sdp);
 
 
         maskVerificationUploadImgArea.setClickable(true);

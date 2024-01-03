@@ -69,7 +69,7 @@ public class OpenPassengerDetailDialog {
                     DriverArrivedActivity activity = (DriverArrivedActivity) MyApp.getInstance().getCurrentAct();
                     if (new AppFunctions(mContext).checkSinchInstance(activity.getSinchServiceInterface())) {
 
-                        activity.getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunc.retrieveLangLBl("", "LBL_INCOMING_CALL"));
+//                        activity.getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunc.retrieveLangLBl("", "LBL_INCOMING_CALL"));
 //                        Call call = activity.getSinchServiceInterface().callUser(Utils.CALLTOPASSENGER + "_" + data_trip.get("PassengerId"), hashMap);
 
                         Call call;
@@ -96,7 +96,7 @@ public class OpenPassengerDetailDialog {
                     ActiveTripActivity activity = (ActiveTripActivity) MyApp.getInstance().getCurrentAct();
                     if (new AppFunctions(mContext).checkSinchInstance(activity.getSinchServiceInterface())) {
 
-                        activity.getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunc.retrieveLangLBl("", "LBL_INCOMING_CALL"));
+//                        activity.getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunc.retrieveLangLBl("", "LBL_INCOMING_CALL"));
 //                        Call call = activity.getSinchServiceInterface().callUser(Utils.CALLTOPASSENGER + "_" + data_trip.get("PassengerId"), hashMap);
 
 

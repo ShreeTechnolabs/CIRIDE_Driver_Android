@@ -67,18 +67,18 @@ public class ContactUsActivity extends AppCompatActivity {
         subjectBox.setHint(generalFunc.retrieveLangLBl("", "LBL_ADD_SUBJECT_HINT_CONTACT_TXT"));
         subjectBox.setHideUnderline(true);
         if (generalFunc.isRTLmode()) {
-            subjectBox.setPaddings(0, 0, (int) getResources().getDimension(R.dimen._10sdp), 0);
+            subjectBox.setPaddings(0, 0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0);
         } else {
-            subjectBox.setPaddings((int) getResources().getDimension(R.dimen._10sdp), 0, 0, 0);
+            subjectBox.setPaddings((int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0, 0, 0);
         }
 
         floatingLabel2.setText(generalFunc.retrieveLangLBl("", "LBL_YOUR_QUERY"));
         contentBox.setHint(generalFunc.retrieveLangLBl("", "LBL_CONTACT_US_WRITE_EMAIL_TXT"));
         contentBox.setHideUnderline(true);
         if (generalFunc.isRTLmode()) {
-            contentBox.setPaddings(0, 0, (int) getResources().getDimension(R.dimen._10sdp), 0);
+            contentBox.setPaddings(0, 0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0);
         } else {
-            contentBox.setPaddings((int) getResources().getDimension(R.dimen._10sdp), 0, 0, 0);
+            contentBox.setPaddings((int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0, 0, 0);
         }
         contentBox.setSingleLine(false);
         contentBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);

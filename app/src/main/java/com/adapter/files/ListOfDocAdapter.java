@@ -69,7 +69,7 @@ public class ListOfDocAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             viewHolder.titleTxt.setText(item.get("doc_name"));
 
-            new CreateRoundedView(Color.parseColor("#ffffff"), (int) mContext.getResources().getDimension(R.dimen._6sdp), 2, mContext.getResources().getColor(R.color.appThemeColor_1), viewHolder.main_layout);
+            new CreateRoundedView(Color.parseColor("#ffffff"), (int) mContext.getResources().getDimension(com.intuit.sdp.R.dimen._6sdp), 2, mContext.getResources().getColor(R.color.appThemeColor_1), viewHolder.main_layout);
             //CHANGES FOR DOCUMENT MISSING
 
 

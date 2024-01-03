@@ -95,10 +95,6 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <service
-            android:name="com.general.files.SinchService"
-            android:exported="false" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -110,7 +106,8 @@
         </provider>
 
         <service android:name="com.general.files.ChatHeadService" />
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -185,6 +182,7 @@
             android:stopWithTask="false" />
 
         <activity
+            android:exported="true"
             android:name=".LauncherActivity"
             android:screenOrientation="portrait">
 

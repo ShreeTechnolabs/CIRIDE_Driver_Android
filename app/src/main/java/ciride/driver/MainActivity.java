@@ -2793,8 +2793,8 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Ge
         View contentView = View.inflate(getActContext(), R.layout.design_end_day_start_trip, null);
         faredialog.setContentView(contentView);
         BottomSheetBehavior mBehavior = BottomSheetBehavior.from((View) contentView.getParent());
-        View bottomSheetView = faredialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
-        BottomSheetBehavior.from(bottomSheetView).setHideable(false);
+//        View bottomSheetView = faredialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
+//        BottomSheetBehavior.from(bottomSheetView).setHideable(false);
         setCancelable(faredialog, false);
 
 
@@ -3059,7 +3059,7 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Ge
 
 
     public void setCancelable(Dialog dialogview, boolean cancelable) {
-        final Dialog dialog = dialogview;
+        /*final Dialog dialog = dialogview;
         View touchOutsideView = dialog.getWindow().getDecorView().findViewById(R.id.touch_outside);
         View bottomSheetView = dialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
         dialog.setCancelable(cancelable);
@@ -3077,7 +3077,7 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Ge
         } else {
             touchOutsideView.setOnClickListener(null);
             BottomSheetBehavior.from(bottomSheetView).setHideable(false);
-        }
+        }*/
     }
 
     /*EndOfTheDay Trip Implementation End */

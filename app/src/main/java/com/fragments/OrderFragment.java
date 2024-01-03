@@ -705,11 +705,11 @@ public class OrderFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     @Override
     public void onCalendarTitleViewClick() {
-        if (calendar_view.findViewById(R.id.weekLayout).getVisibility() == View.VISIBLE) {
+        /*if (calendar_view.findViewById(R.id.weekLayout).getVisibility() == View.VISIBLE) {
             showHideCalender(false);
         } else {
             showHideCalender(true);
-        }
+        }*/
 
     }
 
@@ -759,21 +759,20 @@ public class OrderFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(getActContext());
-            switch (view.getId()) {
-                case R.id.fromDateEditBox:
-                    openFromDateSelection();
-                    break;
-                case R.id.toDateEditBox:
-                    openToDateSelection();
-                    break;
-                case R.id.filterArea:
-                    if (myBookingFragment != null) {
-                        myBookingFragment.BuildType("Order");
-                    } else {
-                        myOrderAct.BuildType("Order");
-                    }
-                    break;
+            int viewId = view.getId();
+
+            if (viewId == R.id.fromDateEditBox) {
+                openFromDateSelection();
+            } else if (viewId == R.id.toDateEditBox) {
+                openToDateSelection();
+            } else if (viewId == R.id.filterArea) {
+                if (myBookingFragment != null) {
+                    myBookingFragment.BuildType("Order");
+                } else {
+                    myOrderAct.BuildType("Order");
+                }
             }
+
         }
     }
 

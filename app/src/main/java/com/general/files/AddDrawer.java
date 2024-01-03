@@ -499,56 +499,46 @@ public class AddDrawer implements AdapterView.OnItemClickListener {
         @Override
         public void onClick(View v) {
 
-            switch (v.getId()) {
-                case R.id.menuImgView:
-                    setMenuAction();
-                    break;
-                case R.id.backImgView:
-                    setMenuAction();
-                    break;
+            int viewId = v.getId();
 
-                case R.id.imgSetting:
-                        closeDrawer();
-                        obj_userProfile = generalFunc.getJsonObject(generalFunc.retrieveValue(Utils.USER_PROFILE_JSON));
+            if (viewId == R.id.menuImgView || viewId == R.id.backImgView) {
+                setMenuAction();
+            } else if (viewId == R.id.imgSetting) {
+                closeDrawer();
+                obj_userProfile = generalFunc.getJsonObject(generalFunc.retrieveValue(Utils.USER_PROFILE_JSON));
 
-                        if (generalFunc.retrieveValue(Utils.FEMALE_RIDE_REQ_ENABLE).equalsIgnoreCase("yes")&& !generalFunc.isDeliverOnlyEnabled()) {
-                            if (generalFunc.getJsonValueStr("eGender", obj_userProfile).equalsIgnoreCase("feMale")) {
-                                new StartActProcess(mContext).startAct(PrefranceActivity.class);
-                            } else {
-                                if (generalFunc.getJsonValueStr("eGender", obj_userProfile).equals("")) {
-                                    genderDailog();
-
-                                } else {
-                                    menuListView.performItemClick(view, 0, Utils.MENU_PROFILE);
-                                }
-                            }
+                if (generalFunc.retrieveValue(Utils.FEMALE_RIDE_REQ_ENABLE).equalsIgnoreCase("yes") && !generalFunc.isDeliverOnlyEnabled()) {
+                    if (generalFunc.getJsonValueStr("eGender", obj_userProfile).equalsIgnoreCase("feMale")) {
+                        new StartActProcess(mContext).startAct(PrefranceActivity.class);
+                    } else {
+                        if (generalFunc.getJsonValueStr("eGender", obj_userProfile).equals("")) {
+                            genderDailog();
                         } else {
                             menuListView.performItemClick(view, 0, Utils.MENU_PROFILE);
                         }
-
-                    break;
-
-                case R.id.logoutarea:
-                    final GenerateAlertBox generateAlert = new GenerateAlertBox(mContext);
-                    generateAlert.setCancelable(false);
-                    generateAlert.setBtnClickList(new GenerateAlertBox.HandleAlertBtnClick() {
-                        @Override
-                        public void handleBtnClick(int btn_id) {
-                            if (btn_id == 0) {
-                                generateAlert.closeAlertBox();
-                            } else {
-                                MyApp.getInstance().logOutFromDevice(false);
-                            }
-
+                    }
+                } else {
+                    menuListView.performItemClick(view, 0, Utils.MENU_PROFILE);
+                }
+            } else if (viewId == R.id.logoutarea) {
+                final GenerateAlertBox generateAlert = new GenerateAlertBox(mContext);
+                generateAlert.setCancelable(false);
+                generateAlert.setBtnClickList(new GenerateAlertBox.HandleAlertBtnClick() {
+                    @Override
+                    public void handleBtnClick(int btn_id) {
+                        if (btn_id == 0) {
+                            generateAlert.closeAlertBox();
+                        } else {
+                            MyApp.getInstance().logOutFromDevice(false);
                         }
-                    });
-                    generateAlert.setContentMessage(generalFunc.retrieveLangLBl("Logout", "LBL_LOGOUT"), generalFunc.retrieveLangLBl("Are you sure you want to logout?", "LBL_WANT_LOGOUT_APP_TXT"));
-                    generateAlert.setPositiveBtn(generalFunc.retrieveLangLBl("", "LBL_YES"));
-                    generateAlert.setNegativeBtn(generalFunc.retrieveLangLBl("", "LBL_NO"));
-                    generateAlert.showAlertBox();
-
-                    break;
+                    }
+                });
+                generateAlert.setContentMessage(generalFunc.retrieveLangLBl("Logout", "LBL_LOGOUT"), generalFunc.retrieveLangLBl("Are you sure you want to logout?", "LBL_WANT_LOGOUT_APP_TXT"));
+                generateAlert.setPositiveBtn(generalFunc.retrieveLangLBl("", "LBL_YES"));
+                generateAlert.setNegativeBtn(generalFunc.retrieveLangLBl("", "LBL_NO"));
+                generateAlert.showAlertBox();
             }
+
         }
     }
 

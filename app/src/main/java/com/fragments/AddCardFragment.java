@@ -165,7 +165,7 @@ public class AddCardFragment extends Fragment implements TextWatcher {
         brandMap.put(Card.MASTERCARD, R.drawable.ic_mastercard_system);
         brandMap.put(Card.VISA, R.drawable.ic_visa_system);
         brandMap.put(Card.UNIONPAY, R.drawable.ic_unionpay_system);
-        brandMap.put(Card.UNKNOWN, R.drawable.ic_unknown);
+        brandMap.put(Card.UNKNOWN, R.drawable.ic_card_unknown);
         Card.BRAND_RESOURCE_MAP.putAll(brandMap);
     }
 

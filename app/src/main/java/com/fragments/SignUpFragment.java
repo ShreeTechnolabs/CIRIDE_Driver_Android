@@ -136,8 +136,8 @@ public class SignUpFragment extends Fragment {
             Picasso.get().load(vSImage).into(countryimage);
         }
 
-        int paddingValStart = (int) getResources().getDimension(R.dimen._35sdp);
-        int paddingValEnd = (int) getResources().getDimension(R.dimen._12sdp);
+        int paddingValStart = (int) getResources().getDimension(com.intuit.sdp.R.dimen._35sdp);
+        int paddingValEnd = (int) getResources().getDimension(com.intuit.sdp.R.dimen._12sdp);
         if (generalFunc.isRTLmode()) {
             countryBox.setPaddings(paddingValEnd, 0, paddingValStart, 0);
             invitecodeBox.setPaddings(paddingValStart, 0, 0, 0);

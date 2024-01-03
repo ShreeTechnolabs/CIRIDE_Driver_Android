@@ -57,20 +57,20 @@ public class HelpCategoryRecycleAdapter extends RecyclerView.Adapter<HelpCategor
 
             viewHolder.titleTxt.setText(item.get("vTitle"));
             viewHolder.titleTxt.setTypeface(font1);
-            viewHolder.titleTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, mContext.getResources().getDimension(R.dimen._15ssp));
+            viewHolder.titleTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, mContext.getResources().getDimension(com.intuit.ssp.R.dimen._15ssp));
             viewHolder.titleTxt.setTextColor(Color.parseColor("#000000"));
             viewHolder.imagearrow.setVisibility(View.GONE);
             viewHolder.layoutBackground.setBackgroundColor(Color.parseColor("#f1f1f1"));
             viewHolder.titleTxt.setClickable(false);
-            viewHolder.layoutBackground.setMinimumHeight((int) mContext.getResources().getDimension(R.dimen._40sdp));
+            viewHolder.layoutBackground.setMinimumHeight((int) mContext.getResources().getDimension(com.intuit.sdp.R.dimen._40sdp));
         }else {
             viewHolder.titleTxt.setText(item.get("vSubTitle"));
             viewHolder.titleTxt.setTypeface(font2);
             viewHolder.titleTxt.setTextColor(Color.parseColor("#141414"));
-            viewHolder.titleTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, mContext.getResources().getDimension(R.dimen._12ssp));
+            viewHolder.titleTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, mContext.getResources().getDimension(com.intuit.ssp.R.dimen._12ssp));
             viewHolder.imagearrow.setVisibility(View.VISIBLE);
             viewHolder.layoutBackground.setBackgroundColor(Color.parseColor("#ffffff"));
-            viewHolder.layoutBackground.setMinimumHeight((int)mContext.getResources().getDimensionPixelSize(R.dimen._45sdp));
+            viewHolder.layoutBackground.setMinimumHeight((int)mContext.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._45sdp));
             viewHolder.titleTxt.setClickable(true);
             viewHolder.titleTxt.setOnClickListener(new View.OnClickListener() {
                 @Override

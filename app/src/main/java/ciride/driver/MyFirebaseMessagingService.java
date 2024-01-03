@@ -1,9 +1,15 @@
 package ciride.driver;
 
+import static com.sinch.android.rtc.SinchPush.isSinchPushPayload;
+import static com.sinch.android.rtc.SinchPush.queryPushNotificationPayload;
+
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.os.PowerManager;
+import android.util.Log;
 
 import com.general.files.FireTripStatusMsg;
 import com.general.files.MyApp;
@@ -12,8 +18,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.sinch.android.rtc.NotificationResult;
-import com.sinch.android.rtc.SinchHelpers;
+import com.sinch.android.rtc.calling.CallNotificationResult;
+import com.utils.Logger;
 import com.utils.Utils;
 
 import java.io.IOException;
@@ -63,47 +69,54 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         Map data = remoteMessage.getData();
+        Logger.d("RemoteMessage", "::" + data.toString());
+        if (!isSinchPushPayload(data)) {
+            if (!Utils.checkText(authorizedEntity)) {
+                authorizedEntity = MyApp.getInstance().getGeneralFun(this).retrieveValue(Utils.APP_GCM_SENDER_ID_KEY);
+            }
 
-        if (SinchHelpers.isSinchPushPayload(remoteMessage.getData())) {
 
-            new ServiceConnection() {
-                private Map payload;
+            if (remoteMessage == null || remoteMessage.getData() == null/* || remoteMessage.getNotification().getBody() == null*/) {
+                return;
+            }
 
-                @Override
-                public void onServiceConnected(ComponentName name, IBinder service) {
-                    if (payload != null) {
-                        SinchService.SinchServiceInterface sinchService = (SinchService.SinchServiceInterface) service;
-                        if (sinchService != null) {
-                            NotificationResult result = sinchService.relayRemotePushNotificationPayload(payload);
-                        }
+            String message = remoteMessage.getData().get("message");
+
+            new FireTripStatusMsg(MyApp.getInstance() != null ? MyApp.getInstance().getCurrentAct() : getApplicationContext(), "Push").fireTripMsg(message);
+            return;
+        }
+
+        CallNotificationResult result;
+
+        try {
+            result = queryPushNotificationPayload(getApplicationContext(), data);
+        } catch (Exception e) {
+            Log.e(TAG, "Error while executing queryPushNotificationPayload", e);
+            return;
+        }
+
+        ServiceConnection serviceConnection = new ServiceConnection() {
+            private CallNotificationResult callNotificationResult;
+
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                if (callNotificationResult != null) {
+                    SinchService.SinchServiceInterface sinchService = (SinchService.SinchServiceInterface) service;
+                    try {
+                        sinchService.relayRemotePushNotificationPayload(callNotificationResult);
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error while executing relayRemotePushNotificationPayload", e);
                     }
-                    payload = null;
                 }
+                callNotificationResult = null;
+            }
 
-                @Override
-                public void onServiceDisconnected(ComponentName name) {
-                }
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+            }
+        };
 
-                public void relayMessageData(Map<String, String> data) {
-                    payload = data;
-                    getApplicationContext().bindService(new Intent(getApplicationContext(), SinchService.class), this, BIND_AUTO_CREATE);
-                }
-            }.relayMessageData(data);
-            return;
+        getApplicationContext().bindService(new Intent(getApplicationContext(), SinchService.class), serviceConnection, Context.BIND_AUTO_CREATE);
 
-        }
-
-        if (!Utils.checkText(authorizedEntity)) {
-            authorizedEntity = MyApp.getInstance().getGeneralFun(this).retrieveValue(Utils.APP_GCM_SENDER_ID_KEY);
-        }
-
-
-        if (remoteMessage == null || remoteMessage.getData() == null/* || remoteMessage.getNotification().getBody() == null*/) {
-            return;
-        }
-
-        String message = remoteMessage.getData().get("message");
-
-        new FireTripStatusMsg(MyApp.getInstance() != null ? MyApp.getInstance().getCurrentAct() : getApplicationContext(), "Push").fireTripMsg(message);
     }
 }

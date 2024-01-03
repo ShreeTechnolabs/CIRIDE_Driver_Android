@@ -176,7 +176,7 @@ public class CabTypeAdapter extends RecyclerView.Adapter<CabTypeAdapter.ViewHold
             int color=mContext.getResources().getColor(R.color.appThemeColor_2);
 
             viewHolder.carTypeTitle.setTextColor(color);
-            new CreateRoundedView(mContext.getResources().getColor(R.color.white), Utils.dipToPixels(mContext,mContext.getResources().getDimension(R.dimen._30sdp)), 2,
+            new CreateRoundedView(mContext.getResources().getColor(R.color.white), Utils.dipToPixels(mContext,mContext.getResources().getDimension(com.intuit.sdp.R.dimen._30sdp)), 2,
                     color, viewHolder.carTypeImgViewselcted);
             // viewHolder.carTypeImgView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             //  viewHolder.carTypeImgViewselcted.setColorFilter(mContext.getResources().getColor(R.color.white));
@@ -189,7 +189,7 @@ public class CabTypeAdapter extends RecyclerView.Adapter<CabTypeAdapter.ViewHold
             viewHolder.carTypeTitle.setTextColor(mContext.getResources().getColor(R.color.black));
 
             int color=Color.parseColor("#cbcbcb");
-            new CreateRoundedView(Color.parseColor("#ffffff"), Utils.dipToPixels(mContext, mContext.getResources().getDimension(R.dimen._30sdp)), 2,
+            new CreateRoundedView(Color.parseColor("#ffffff"), Utils.dipToPixels(mContext, mContext.getResources().getDimension(com.intuit.sdp.R.dimen._30sdp)), 2,
                     color, viewHolder.carTypeImgView);
             // viewHolder.carTypeImgView.setColorFilter(Color.parseColor("#999fa2"));
             viewHolder.carTypeImgView.setBorderColor(color);

@@ -324,25 +324,5 @@ public class AppLoignRegisterActivity extends BaseActivity implements GoogleApiC
 
 
     public void manageSinchClient() {
-        if (getSinchServiceInterface() != null && !getSinchServiceInterface().isStarted()) {
-            getSinchServiceInterface().startClient("Driver" + "_" + generalFunc.getMemberId());
-
-            GetDeviceToken getDeviceToken = new GetDeviceToken(generalFunc);
-
-            getDeviceToken.setDataResponseListener(vDeviceToken -> {
-
-                if (!vDeviceToken.equals("")) {
-                    try {
-                        getSinchServiceInterface().getSinchClient().registerPushNotificationData(vDeviceToken.getBytes());
-
-                    } catch (Exception e) {
-
-                    }
-                }
-
-
-            });
-            getDeviceToken.execute();
-        }
     }
 }

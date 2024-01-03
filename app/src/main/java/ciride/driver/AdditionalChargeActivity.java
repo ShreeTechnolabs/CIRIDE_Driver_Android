@@ -754,7 +754,7 @@ public class AdditionalChargeActivity extends BaseActivity implements UpdateFreq
     MTextView retryTxtArea;
 
     public void setCancelable(Dialog dialogview, boolean cancelable) {
-        final Dialog dialog = dialogview;
+        /*final Dialog dialog = dialogview;
         View touchOutsideView = dialog.getWindow().getDecorView().findViewById(R.id.touch_outside);
         View bottomSheetView = dialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
 
@@ -768,7 +768,7 @@ public class AdditionalChargeActivity extends BaseActivity implements UpdateFreq
         } else {
             touchOutsideView.setOnClickListener(null);
             BottomSheetBehavior.from(bottomSheetView).setHideable(false);
-        }
+        }*/
     }
 
 

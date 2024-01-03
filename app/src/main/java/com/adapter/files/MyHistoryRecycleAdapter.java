@@ -55,8 +55,8 @@ public class MyHistoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
         this.generalFunc = generalFunc;
         this.isFooterEnabled = isFooterEnabled;
         userProfileJsonObj = generalFunc.getJsonObject(generalFunc.retrieveValue(Utils.USER_PROFILE_JSON));
-        size15_dp = (int) mContext.getResources().getDimension(R.dimen._15sdp);
-        imagewidth=  (int) mContext.getResources().getDimension(R.dimen._50sdp);
+        size15_dp = (int) mContext.getResources().getDimension(com.intuit.sdp.R.dimen._15sdp);
+        imagewidth=  (int) mContext.getResources().getDimension(com.intuit.sdp.R.dimen._50sdp);
     }
 
     public void setOnItemClickListener(OnItemClickListener mItemClickListener) {

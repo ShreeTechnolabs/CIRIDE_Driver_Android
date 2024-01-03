@@ -539,11 +539,12 @@ public class HailActivity extends AppCompatActivity implements GetLocationUpdate
         public void onClick(View view) {
             int id = view.getId();
             Utils.hideKeyboard(HailActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    onBackPressed();
-                    break;
+            int viewId = view.getId();
+
+            if (viewId == R.id.backImgView) {
+                onBackPressed();
             }
+
 
             if (id == destarea.getId()) {
 

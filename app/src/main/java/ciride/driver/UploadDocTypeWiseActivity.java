@@ -89,31 +89,29 @@ public class UploadDocTypeWiseActivity extends AppCompatActivity {
             bn.putString("doc_file", "");
             bn.putString("iDriverVehicleId", "");
             Utils.hideKeyboard(UploadDocTypeWiseActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    UploadDocTypeWiseActivity.super.onBackPressed();
-                    break;
-                case R.id.rideArea:
-                    if (getIntent().getStringExtra("selView").equalsIgnoreCase("doc")) {
-                        new StartActProcess(getActContext()).startActWithData(ListOfDocumentActivity.class, bn);
-                    } else {
-                        if (totalVehicles > 0) {
-                            new StartActProcess(getActContext()).startActWithData(ManageVehiclesActivity.class, bn);
-                        } else {
-                            new StartActProcess(getActContext()).startActForResult(AddVehicleActivity.class, bn, ADDVEHICLE);
-                        }
-                    }
-                    break;
+            int viewId = view.getId();
 
-                case R.id.uberxArea:
-                    if (getIntent().getStringExtra("selView").equalsIgnoreCase("doc")) {
-                        bn.putString("seltype", Utils.CabGeneralType_UberX);
-                        new StartActProcess(getActContext()).startActWithData(ListOfDocumentActivity.class, bn);
-                        break;
+            if (viewId == R.id.backImgView) {
+                UploadDocTypeWiseActivity.super.onBackPressed();
+            } else if (viewId == R.id.rideArea) {
+                if (getIntent().getStringExtra("selView").equalsIgnoreCase("doc")) {
+                    new StartActProcess(getActContext()).startActWithData(ListOfDocumentActivity.class, bn);
+                } else {
+                    if (totalVehicles > 0) {
+                        new StartActProcess(getActContext()).startActWithData(ManageVehiclesActivity.class, bn);
                     } else {
-                        bn.putString("UBERX_PARENT_CAT_ID", getIntent().getStringExtra("UBERX_PARENT_CAT_ID"));
+                        new StartActProcess(getActContext()).startActForResult(AddVehicleActivity.class, bn, ADDVEHICLE);
                     }
+                }
+            } else if (viewId == R.id.uberxArea) {
+                if (getIntent().getStringExtra("selView").equalsIgnoreCase("doc")) {
+                    bn.putString("seltype", Utils.CabGeneralType_UberX);
+                    new StartActProcess(getActContext()).startActWithData(ListOfDocumentActivity.class, bn);
+                } else {
+                    bn.putString("UBERX_PARENT_CAT_ID", getIntent().getStringExtra("UBERX_PARENT_CAT_ID"));
+                }
             }
+
         }
     }
 

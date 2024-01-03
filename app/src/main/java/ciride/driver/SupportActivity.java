@@ -121,33 +121,27 @@ public class SupportActivity extends AppCompatActivity {
         public void onClick(View view) {
             Utils.hideKeyboard(SupportActivity.this);
             Bundle bn = new Bundle();
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    SupportActivity.super.onBackPressed();
-                    break;
-                case R.id.aboutusarea:
-                    bn.putString("staticpage", "1");
-                    new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
-                    break;
-                case R.id.privacyarea:
-                    bn.putString("staticpage", "33");
-                    new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
-                    break;
-                case R.id.contactarea:
-                    new StartActProcess(getActContext()).startAct(ContactUsActivity.class);
-                    break;
-                case R.id.helparea:
-                    new StartActProcess(getActContext()).startAct(HelpActivity.class);
-                    break;
-                case R.id.termsCondArea:
-                    bn.putString("staticpage", "4");
-                    new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
-                    break;
-                case R.id.chatarea:
-                    startChatActivity();
-                    break;
+            int viewId = view.getId();
 
+            if (viewId == R.id.backImgView) {
+                SupportActivity.super.onBackPressed();
+            } else if (viewId == R.id.aboutusarea) {
+                bn.putString("staticpage", "1");
+                new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
+            } else if (viewId == R.id.privacyarea) {
+                bn.putString("staticpage", "33");
+                new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
+            } else if (viewId == R.id.contactarea) {
+                new StartActProcess(getActContext()).startAct(ContactUsActivity.class);
+            } else if (viewId == R.id.helparea) {
+                new StartActProcess(getActContext()).startAct(HelpActivity.class);
+            } else if (viewId == R.id.termsCondArea) {
+                bn.putString("staticpage", "4");
+                new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
+            } else if (viewId == R.id.chatarea) {
+                startChatActivity();
             }
+
         }
     }
 

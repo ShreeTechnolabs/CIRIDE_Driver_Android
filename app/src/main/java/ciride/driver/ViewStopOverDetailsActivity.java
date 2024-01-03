@@ -212,12 +212,12 @@ public class ViewStopOverDetailsActivity extends BaseActivity implements ViewSto
 
         @Override
         public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    ViewStopOverDetailsActivity.super.onBackPressed();
-                    break;
+            int viewId = view.getId();
 
+            if (viewId == R.id.backImgView) {
+                ViewStopOverDetailsActivity.super.onBackPressed();
             }
+
         }
 
     }

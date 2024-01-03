@@ -211,13 +211,12 @@ public class BookingsActivity extends AppCompatActivity implements GetLocationUp
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(BookingsActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    BookingsActivity.super.onBackPressed();
-                    break;
-                case R.id.filterImageview:
-                    BuildType("Normal");
-                    break;
+            int viewId = view.getId();
+
+            if (viewId == R.id.backImgView) {
+                BookingsActivity.super.onBackPressed();
+            } else if (viewId == R.id.filterImageview) {
+                BuildType("Normal");
             }
         }
     }

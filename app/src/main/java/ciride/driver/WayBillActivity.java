@@ -378,12 +378,12 @@ public class WayBillActivity extends AppCompatActivity {
         public void onClick(View view) {
 
             Utils.hideKeyboard(WayBillActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    onBackPressed();
-                    break;
+            int viewId = view.getId();
 
+            if (viewId == R.id.backImgView) {
+                onBackPressed();
             }
+
         }
     }
 }

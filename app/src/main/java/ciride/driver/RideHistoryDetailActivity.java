@@ -865,7 +865,7 @@ public class RideHistoryDetailActivity extends AppCompatActivity implements OnMa
         if (row_name.equalsIgnoreCase("eDisplaySeperator")) {
             convertView = new View(getActContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dipToPixels(getActContext(), 1));
-            params.setMargins(0, 0, 0, (int) getResources().getDimension(R.dimen._5sdp));
+            params.setMargins(0, 0, 0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._5sdp));
             convertView.setBackgroundColor(Color.parseColor("#dedede"));
             convertView.setLayoutParams(params);
         } else {
@@ -873,7 +873,7 @@ public class RideHistoryDetailActivity extends AppCompatActivity implements OnMa
             convertView = infalInflater.inflate(R.layout.design_fare_deatil_row, null);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, (int) getResources().getDimension(R.dimen._10sdp), 0, isLast ? (int) getResources().getDimension(R.dimen._10sdp) : 0);
+            params.setMargins(0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0, isLast ? (int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp) : 0);
             convertView.setLayoutParams(params);
 
             MTextView titleHTxt = (MTextView) convertView.findViewById(R.id.titleHTxt);
@@ -1072,27 +1072,23 @@ public class RideHistoryDetailActivity extends AppCompatActivity implements OnMa
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(RideHistoryDetailActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    RideHistoryDetailActivity.super.onBackPressed();
-                    break;
-                case R.id.viewReqServicesTxtView:
-                    Bundle bundle = new Bundle();
-                    bundle.putString("iTripId", generalFunc.getJsonValue("iTripId", tripData));
-                    break;
-                case R.id.subTitleTxt:
-                    sendReceipt();
-                    break;
-                case R.id.signArea:
-                    showSignatureImage(generalFunc.getJsonValue("vName", tripData) + " " +
-                            generalFunc.getJsonValue("vLastName", tripData), senderImage, true);
-                    break;
-                case R.id.viewDeliveryDetailsArea:
-                    Bundle bn = new Bundle();
-                    bn.putString("TripId", generalFunc.getJsonValue("iTripId", tripData));
-                    bn.putString("Status", "showHistoryScreen");
-                    break;
+            int viewId = view.getId();
+
+            if (viewId == R.id.backImgView) {
+                RideHistoryDetailActivity.super.onBackPressed();
+            } else if (viewId == R.id.viewReqServicesTxtView) {
+                Bundle bundle = new Bundle();
+                bundle.putString("iTripId", generalFunc.getJsonValue("iTripId", tripData));
+            } else if (viewId == R.id.subTitleTxt) {
+                sendReceipt();
+            } else if (viewId == R.id.signArea) {
+                showSignatureImage(generalFunc.getJsonValue("vName", tripData) + " " + generalFunc.getJsonValue("vLastName", tripData), senderImage, true);
+            } else if (viewId == R.id.viewDeliveryDetailsArea) {
+                Bundle bn = new Bundle();
+                bn.putString("TripId", generalFunc.getJsonValue("iTripId", tripData));
+                bn.putString("Status", "showHistoryScreen");
             }
+
         }
     }
 }

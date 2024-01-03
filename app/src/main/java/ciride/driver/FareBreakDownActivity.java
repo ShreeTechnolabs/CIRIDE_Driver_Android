@@ -87,12 +87,9 @@ public class FareBreakDownActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(FareBreakDownActivity.this);
-            switch (view.getId()) {
-
-                case R.id.backImgView:
-                    FareBreakDownActivity.super.onBackPressed();
-                    break;
-
+            int viewId = view.getId();
+            if (viewId == R.id.backImgView) {
+                FareBreakDownActivity.super.onBackPressed();
             }
         }
     }

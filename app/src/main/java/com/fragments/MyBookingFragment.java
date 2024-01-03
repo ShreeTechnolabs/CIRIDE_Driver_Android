@@ -205,14 +205,14 @@ public class MyBookingFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(getActContext());
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    getActivity().onBackPressed();
-                    break;
-                case R.id.filterImageview:
-                    BuildType("Normal");
-                    break;
+            int viewId = view.getId();
+
+            if (viewId == R.id.backImgView) {
+                getActivity().onBackPressed();
+            } else if (viewId == R.id.filterImageview) {
+                BuildType("Normal");
             }
+
         }
     }
 

@@ -71,7 +71,6 @@ import com.mukesh.OtpView;
 import com.sinch.android.rtc.calling.Call;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.utils.CommonUtilities;
 import com.utils.Logger;
 import com.utils.Utils;
 import com.view.CreateRoundedView;
@@ -84,7 +83,6 @@ import com.view.MyProgressDialog;
 import com.view.SelectableRoundedImageView;
 import com.view.editBox.MaterialEditText;
 
-import org.apache.commons.lang3.text.WordUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -829,7 +827,7 @@ public class LiveTrackOrderDetail2Activity extends BaseActivity implements GetLo
                 hashMap.put("Name", generalFunc.getJsonValueStr("vName", userProfileJsonObj));
                 hashMap.put("PImage", generalFunc.getJsonValueStr("vImage", userProfileJsonObj));
                 hashMap.put("type", Utils.userType);
-                getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunc.retrieveLangLBl("", "LBL_INCOMING_CALL"));
+//                getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunc.retrieveLangLBl("", "LBL_INCOMING_CALL"));
 
                     Call call = getSinchServiceInterface().callUser(Utils.CALLTOPASSENGER + "_" + data_trip.get("PassengerId"), hashMap);
                     String callId = call.getCallId();
@@ -1078,7 +1076,7 @@ public class LiveTrackOrderDetail2Activity extends BaseActivity implements GetLo
 //                    } else {
 //                        vImage = "temp";
 //                    }
-                    int imagewidth = (int) getResources().getDimension(R.dimen._60sdp);
+                    int imagewidth = (int) getResources().getDimension(com.intuit.sdp.R.dimen._60sdp);
                     ImageView storeImg = findViewById(R.id.storeImg);
                     if (GenieOrderType != null && GenieOrderType.equalsIgnoreCase("Runner")) {
                         storeImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_locate_place));
@@ -1108,7 +1106,7 @@ public class LiveTrackOrderDetail2Activity extends BaseActivity implements GetLo
                                                 CardView mCardView = findViewById(R.id.mCardView);
                                                 mCardView.setPreventCornerOverlap(false);
 
-                                                RoundCornerDrawable round = new RoundCornerDrawable(bitmap, getResources().getDimension(R.dimen._10sdp), 0);
+                                                RoundCornerDrawable round = new RoundCornerDrawable(bitmap, getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0);
                                                 storeImg.setVisibility(View.GONE);
                                                 mCardView.setBackground(round);
                                             }

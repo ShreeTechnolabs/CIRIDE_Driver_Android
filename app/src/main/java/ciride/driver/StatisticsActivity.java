@@ -67,7 +67,7 @@ public class StatisticsActivity extends AppCompatActivity {
             tablayoutArea.setVisibility(View.VISIBLE);
             titles = new CharSequence[]{generalFunc.retrieveLangLBl("Trip", "LBL_TRIP_TXT"), generalFunc.retrieveLangLBl("Order", "LBL_ORDER")};
             toolbar_layout.setBackgroundColor(getResources().getColor(R.color.appThemeColor_1));
-            toolbar_layout.setPadding(0, 0, 0, (int) getResources().getDimension(R.dimen._18sdp));
+            toolbar_layout.setPadding(0, 0, 0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._18sdp));
         }
 
         if (generalFunc.retrieveValue(Utils.ONLYDELIVERALL_KEY).equalsIgnoreCase("Yes") ) {

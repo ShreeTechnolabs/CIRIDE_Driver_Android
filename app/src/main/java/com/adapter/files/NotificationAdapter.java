@@ -39,10 +39,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.generalFunc = generalFunc;
         this.type = type;
         this.isFooterEnabled = isFooterEnabled;
-        topMargin = (int) mContext.getResources().getDimension(R.dimen._15sdp);
-        topMargin1 = (int) mContext.getResources().getDimension(R.dimen._20sdp);
-        maxheight = (int) mContext.getResources().getDimension(R.dimen._110sdp);
-        minheight = (int) mContext.getResources().getDimension(R.dimen._70sdp);
+        topMargin = (int) mContext.getResources().getDimension(com.intuit.sdp.R.dimen._15sdp);
+        topMargin1 = (int) mContext.getResources().getDimension(com.intuit.sdp.R.dimen._20sdp);
+        maxheight = (int) mContext.getResources().getDimension(com.intuit.sdp.R.dimen._110sdp);
+        minheight = (int) mContext.getResources().getDimension(com.intuit.sdp.R.dimen._70sdp);
 
     }
 

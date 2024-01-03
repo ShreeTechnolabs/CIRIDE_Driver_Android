@@ -755,8 +755,8 @@ public class VerifyInfoActivity extends AppCompatActivity {
         editInfoDialog.setContentView(contentView);
         BottomSheetBehavior mBehavior = BottomSheetBehavior.from((View) contentView.getParent());
         mBehavior.setPeekHeight(1500);
-        View bottomSheetView = editInfoDialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
-        BottomSheetBehavior.from(bottomSheetView).setHideable(false);
+//        View bottomSheetView = editInfoDialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
+//        BottomSheetBehavior.from(bottomSheetView).setHideable(false);
         setCancelable(editInfoDialog, false);
 
         MTextView titleTxt, hintTxt, errorTxt, updateEmailTxt, updateMobileTxt, cancelTxt;
@@ -904,7 +904,7 @@ public class VerifyInfoActivity extends AppCompatActivity {
 
 
     public void setCancelable(Dialog dialogview, boolean cancelable) {
-        final Dialog dialog = dialogview;
+        /*final Dialog dialog = dialogview;
         View touchOutsideView = dialog.getWindow().getDecorView().findViewById(R.id.touch_outside);
         View bottomSheetView = dialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
 
@@ -918,7 +918,7 @@ public class VerifyInfoActivity extends AppCompatActivity {
         } else {
             touchOutsideView.setOnClickListener(null);
             BottomSheetBehavior.from(bottomSheetView).setHideable(false);
-        }
+        }*/
     }
 
 

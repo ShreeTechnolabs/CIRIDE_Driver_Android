@@ -1325,18 +1325,18 @@ public class DriverArrivedActivity extends BaseActivity implements OnMapReadyCal
         RelativeLayout commentArea = (RelativeLayout) dialogView.findViewById(R.id.commentArea);
         reasonBox.setHideUnderline(true);
         if (generalFunc.isRTLmode()) {
-            reasonBox.setPaddings(0, 0, (int) getResources().getDimension(R.dimen._10sdp), 0);
+            reasonBox.setPaddings(0, 0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0);
         } else {
-            reasonBox.setPaddings((int) getResources().getDimension(R.dimen._10sdp), 0, 0, 0);
+            reasonBox.setPaddings((int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0, 0, 0);
         }
 
         reasonBox.setSingleLine(false);
         reasonBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         reasonBox.setGravity(Gravity.TOP);
         if (generalFunc.isRTLmode()) {
-            reasonBox.setPaddings(0, 0, (int) getResources().getDimension(R.dimen._10sdp), 0);
+            reasonBox.setPaddings(0, 0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0);
         } else {
-            reasonBox.setPaddings((int) getResources().getDimension(R.dimen._10sdp), 0, 0, 0);
+            reasonBox.setPaddings((int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0, 0, 0);
         }
 
         reasonBox.setVisibility(View.GONE);
@@ -1482,7 +1482,7 @@ public class DriverArrivedActivity extends BaseActivity implements OnMapReadyCal
             hashMap.put("Name", generalFunc.getJsonValueStr("vName", userProfileJsonObj));
             hashMap.put("PImage", generalFunc.getJsonValueStr("vImage", userProfileJsonObj));
             hashMap.put("type", Utils.userType);
-            getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunc.retrieveLangLBl("", "LBL_INCOMING_CALL"));
+//            getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunc.retrieveLangLBl("", "LBL_INCOMING_CALL"));
             Call call;
             if (Utils.checkText(data_trip.get("iGcmRegId_U"))) {
                 call = getSinchServiceInterface().callUser(Utils.CALLTOPASSENGER + "_" + data_trip.get("PassengerId"), hashMap);
@@ -1502,80 +1502,70 @@ public class DriverArrivedActivity extends BaseActivity implements OnMapReadyCal
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
+        int itemId = item.getItemId();
 
-            case R.id.menu_passenger_detail:
-                if (REQUEST_TYPE.equals("Deliver")) {
-                    Bundle bn = new Bundle();
-                    bn.putString("TripId", data_trip.get("TripId"));
-                    bn.putSerializable("data_trip", data_trip);
-                } else {
-                    new OpenPassengerDetailDialog(getActContext(), data_trip, generalFunc, false);
-                }
-                return true;
-            case R.id.menu_cancel_trip:
-                getDeclineReasonsList();
-                return true;
-            case R.id.menu_waybill_trip:
+        if (itemId == R.id.menu_passenger_detail) {
+            if (REQUEST_TYPE.equals("Deliver")) {
                 Bundle bn = new Bundle();
+                bn.putString("TripId", data_trip.get("TripId"));
                 bn.putSerializable("data_trip", data_trip);
-                new StartActProcess(getActContext()).startActWithData(WayBillActivity.class, bn);
-                return true;
-            case R.id.menu_call:
-                if (REQUEST_TYPE.equals("Deliver")) {
-                    Bundle bn1 = new Bundle();
-                    bn1.putString("TripId", data_trip.get("TripId"));
-                    bn1.putSerializable("data_trip", data_trip);
-                } else {
-                    try {
-
-//                        Intent callIntent = new Intent(Intent.ACTION_DIAL);
-//                        // callIntent.setData(Uri.parse("tel:" + data_trip.get("PPhoneC") + "" + data_trip.get("PPhone")));
-//                        String phoneCode = data_trip.get("PPhoneC") != null && Utils.checkText(data_trip.get("PPhoneC")) ? "+" + data_trip.get("PPhoneC") : "";
-//                        callIntent.setData(Uri.parse("tel:" + data_trip.get("PPhone")));
-//                        getActContext().startActivity(callIntent);
-                        // getMaskNumber();
-
-                        if (generalFunc.getJsonValue("RIDE_DRIVER_CALLING_METHOD", userProfileJsonObj).equals("Voip")) {
-                            sinchCall();
-                        } else {
-                            getMaskNumber();
-                        }
-                    } catch (Exception e) {
-                    }
-                }
-                return true;
-            case R.id.menu_message:
-                if (REQUEST_TYPE.equals("Deliver")) {
-                    Bundle bn2 = new Bundle();
-                    bn2.putString("TripId", data_trip.get("TripId"));
-                    bn2.putSerializable("data_trip", data_trip);
-                } else {
-                    Bundle bnChat = new Bundle();
-                    bnChat.putString("iFromMemberId", data_trip.get("PassengerId"));
-                    bnChat.putString("FromMemberImageName", data_trip.get("PPicName"));
-                    bnChat.putString("iTripId", data_trip.get("iTripId"));
-                    bnChat.putString("FromMemberName", data_trip.get("PName"));
-                    bnChat.putString("vBookingNo", data_trip.get("vRideNo"));
-                    new StartActProcess(getActContext()).startActWithData(ChatActivity.class, bnChat);
-                }
-                return true;
-            case R.id.menu_specialInstruction:
-                String last_trip_data = generalFunc.getJsonValue("TripDetails", userProfileJsonObj.toString());
-                if (!generalFunc.getJsonValue("moreServices", last_trip_data).equalsIgnoreCase("") && generalFunc.getJsonValue("moreServices", last_trip_data).equalsIgnoreCase("Yes")) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("iTripId", data_trip.get("iTripId"));
-                } else {
-                    if (data_trip.get("tUserComment") != null && !data_trip.get("tUserComment").equals("")) {
-                        generalFunc.showGeneralMessage(generalFunc.retrieveLangLBl("Special Instruction", "LBL_SPECIAL_INSTRUCTION_TXT"), data_trip.get("tUserComment"));
+            } else {
+                new OpenPassengerDetailDialog(getActContext(), data_trip, generalFunc, false);
+            }
+        } else if (itemId == R.id.menu_cancel_trip) {
+            getDeclineReasonsList();
+        } else if (itemId == R.id.menu_waybill_trip) {
+            Bundle bn = new Bundle();
+            bn.putSerializable("data_trip", data_trip);
+            new StartActProcess(getActContext()).startActWithData(WayBillActivity.class, bn);
+        } else if (itemId == R.id.menu_call) {
+            if (REQUEST_TYPE.equals("Deliver")) {
+                Bundle bn1 = new Bundle();
+                bn1.putString("TripId", data_trip.get("TripId"));
+                bn1.putSerializable("data_trip", data_trip);
+            } else {
+                try {
+                    if (generalFunc.getJsonValue("RIDE_DRIVER_CALLING_METHOD", userProfileJsonObj).equals("Voip")) {
+                        sinchCall();
                     } else {
-                        generalFunc.showGeneralMessage(generalFunc.retrieveLangLBl("Special Instruction", "LBL_SPECIAL_INSTRUCTION_TXT"), generalFunc.retrieveLangLBl("", "LBL_NO_SPECIAL_INSTRUCTION"));
+                        getMaskNumber();
                     }
+                } catch (Exception e) {
+                    // Handle exception
                 }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            }
+        } else if (itemId == R.id.menu_message) {
+            if (REQUEST_TYPE.equals("Deliver")) {
+                Bundle bn2 = new Bundle();
+                bn2.putString("TripId", data_trip.get("TripId"));
+                bn2.putSerializable("data_trip", data_trip);
+            } else {
+                Bundle bnChat = new Bundle();
+                bnChat.putString("iFromMemberId", data_trip.get("PassengerId"));
+                bnChat.putString("FromMemberImageName", data_trip.get("PPicName"));
+                bnChat.putString("iTripId", data_trip.get("iTripId"));
+                bnChat.putString("FromMemberName", data_trip.get("PName"));
+                bnChat.putString("vBookingNo", data_trip.get("vRideNo"));
+                new StartActProcess(getActContext()).startActWithData(ChatActivity.class, bnChat);
+            }
+        } else if (itemId == R.id.menu_specialInstruction) {
+            String last_trip_data = generalFunc.getJsonValue("TripDetails", userProfileJsonObj.toString());
+            if (!generalFunc.getJsonValue("moreServices", last_trip_data).equalsIgnoreCase("") &&
+                    generalFunc.getJsonValue("moreServices", last_trip_data).equalsIgnoreCase("Yes")) {
+                Bundle bundle = new Bundle();
+                bundle.putString("iTripId", data_trip.get("iTripId"));
+            } else {
+                if (data_trip.get("tUserComment") != null && !data_trip.get("tUserComment").equals("")) {
+                    generalFunc.showGeneralMessage(generalFunc.retrieveLangLBl("Special Instruction", "LBL_SPECIAL_INSTRUCTION_TXT"), data_trip.get("tUserComment"));
+                } else {
+                    generalFunc.showGeneralMessage(generalFunc.retrieveLangLBl("Special Instruction", "LBL_SPECIAL_INSTRUCTION_TXT"), generalFunc.retrieveLangLBl("", "LBL_NO_SPECIAL_INSTRUCTION"));
+                }
+            }
+        } else {
+            super.onOptionsItemSelected(item);
         }
+
+        return true;
     }
 
     @Override

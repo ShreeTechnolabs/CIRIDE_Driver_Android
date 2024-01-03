@@ -56,7 +56,7 @@ public class AllPermissionsHandleActivity extends AppCompatActivity {
         btn_type2.setText(generalFunctions.retrieveLangLBl("", "LBL_ALLOW"));
 
         RelativeLayout.LayoutParams lyParams_permisssionImg = (RelativeLayout.LayoutParams) permisssionImg.getLayoutParams();
-        lyParams_permisssionImg.height = (int) ((Utils.getScreenPixelWidth(getActContext()) - getResources().getDimensionPixelSize(R.dimen._50sdp)) / 1.3888);
+        lyParams_permisssionImg.height = (int) ((Utils.getScreenPixelWidth(getActContext()) - getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._50sdp)) / 1.3888);
 
         permisssionImg.setLayoutParams(lyParams_permisssionImg);
 

@@ -1737,7 +1737,7 @@ public class CabRequestedActivity extends AppCompatActivity implements GenerateA
         progressLayout_frame_dialog.setVisibility(View.GONE);
 
 
-        behavior.setPeekHeight(getResources().getDimensionPixelSize(R.dimen._100sdp));
+        behavior.setPeekHeight(getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._100sdp));
         behavior.addBottomSheetCallback(new AnchorBottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i, int i1) {
@@ -1745,11 +1745,11 @@ public class CabRequestedActivity extends AppCompatActivity implements GenerateA
                 if (i1 == AnchorBottomSheetBehavior.STATE_COLLAPSED) {
                     progressLayout_frame_dialog.setVisibility(View.GONE);
                     progressLayout_frame.setVisibility(View.VISIBLE);
-                    behavior.setPeekHeight(getResources().getDimensionPixelSize(R.dimen._100sdp));
+                    behavior.setPeekHeight(getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._100sdp));
                 } else if (i1 == AnchorBottomSheetBehavior.STATE_EXPANDED || i1 == AnchorBottomSheetBehavior.STATE_DRAGGING) {
                     progressLayout_frame_dialog.setVisibility(View.VISIBLE);
                     progressLayout_frame.setVisibility(View.GONE);
-                    behavior.setPeekHeight(getResources().getDimensionPixelSize(R.dimen._165sdp));
+                    behavior.setPeekHeight(getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._165sdp));
 
 
                 }
@@ -1802,7 +1802,7 @@ public class CabRequestedActivity extends AppCompatActivity implements GenerateA
     }
 
     public void setCancelable(Dialog dialogview, boolean cancelable) {
-        final Dialog dialog = dialogview;
+        /*final Dialog dialog = dialogview;
         View touchOutsideView = dialog.getWindow().getDecorView().findViewById(R.id.touch_outside);
         View bottomSheetView = dialog.getWindow().getDecorView().findViewById(R.id.design_bottom_sheet);
 
@@ -1816,7 +1816,7 @@ public class CabRequestedActivity extends AppCompatActivity implements GenerateA
         } else {
             touchOutsideView.setOnClickListener(null);
             BottomSheetBehavior.from(bottomSheetView).setHideable(false);
-        }
+        }*/
     }
 
     @Override
@@ -1945,23 +1945,21 @@ public class CabRequestedActivity extends AppCompatActivity implements GenerateA
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(CabRequestedActivity.this);
-            switch (view.getId()) {
-                case R.id.progressLayout:
-                    //  acceptRequest();
-                    break;
+            int viewId = view.getId();
 
-                case R.id.deliveryDetailsBtn:
-                    Bundle bn = new Bundle();
-                    bn.putString("TripId", "");
-                    bn.putString("iCabBookingId", generalFunc.getJsonValue("iBookingId", message_str));
-                    bn.putString("iCabRequestId", iCabRequestId);
-                    bn.putString("Status", "cabRequestScreen");
-                    break;
-                case R.id.moreServiceBtn:
-                    Bundle bundle = new Bundle();
-                    bundle.putString("iCabRequestId", iCabRequestId);
-                    break;
+            if (viewId == R.id.progressLayout) {
+                // acceptRequest();
+            } else if (viewId == R.id.deliveryDetailsBtn) {
+                Bundle bn = new Bundle();
+                bn.putString("TripId", "");
+                bn.putString("iCabBookingId", generalFunc.getJsonValue("iBookingId", message_str));
+                bn.putString("iCabRequestId", iCabRequestId);
+                bn.putString("Status", "cabRequestScreen");
+            } else if (viewId == R.id.moreServiceBtn) {
+                Bundle bundle = new Bundle();
+                bundle.putString("iCabRequestId", iCabRequestId);
             }
+
         }
     }
 

@@ -1198,76 +1198,45 @@ public class MyWalletActivity extends AppCompatActivity implements CompoundButto
             if (view.getId() == btn_type1.getId()) {
                 new StartActProcess(getActContext()).startAct(MyWalletHistoryActivity.class);
             }
+            int viewId = view.getId();
 
+            if (viewId == R.id.backImgView) {
+                onBackPressed();
+            } else if (viewId == R.id.requestView) {
+                Bundle bundle = new Bundle();
+                bundle.putString("WITHDRAWABLE_AMOUNT", "" + WITHDRAWABLE_AMOUNT);
+                bundle.putString("NON_WITHDRAWABLE_AMOUNT", "" + NON_WITHDRAWABLE_AMOUNT);
+                bundle.putString("ACCOUNT_NO", "" + ACCOUNT_NO);
+                bundle.putString("MemberBalance", "" + MemberBalance);
 
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    onBackPressed();
-                    break;
-                case R.id.requestView:
-                    Bundle bundle = new Bundle();
-                    bundle.putString("WITHDRAWABLE_AMOUNT", "" + WITHDRAWABLE_AMOUNT);
-                    bundle.putString("NON_WITHDRAWABLE_AMOUNT", "" + NON_WITHDRAWABLE_AMOUNT);
-                    bundle.putString("ACCOUNT_NO", "" + ACCOUNT_NO);
-                    bundle.putString("MemberBalance", "" + MemberBalance);
+                bundle.putString("ORIG_WITHDRAWABLE_AMOUNT", "" + ORIG_WITHDRAWABLE_AMOUNT);
+                bundle.putString("ORIG_NON_WITHDRAWABLE_AMOUNT", "" + ORIG_NON_WITHDRAWABLE_AMOUNT);
+                bundle.putString("vAccountNumber", "" + vAccountNumber);
 
-                    bundle.putString("ORIG_WITHDRAWABLE_AMOUNT", "" + ORIG_WITHDRAWABLE_AMOUNT);
-                    bundle.putString("ORIG_NON_WITHDRAWABLE_AMOUNT", "" + ORIG_NON_WITHDRAWABLE_AMOUNT);
-                    bundle.putString("vAccountNumber", "" + vAccountNumber);
-
-
-                    new StartActProcess(getActContext()).startActWithData(WithdrawBalanceActivity.class, bundle);
-                    break;
-                case R.id.viewTransactionsTxt:
-                    new StartActProcess(getActContext()).startAct(MyWalletHistoryActivity.class);
-                    break;
-
-
-//                case R.id.termsTxt:
-//                    Bundle bn = new Bundle();
-//                    bn.putString("staticpage", "4");
-//                    new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
-//                    break;
-
-                case R.id.ic_back_arrow:
-                    goback();
-                    break;
-
-//                case R.id.addTransferBtnArea:
-//                    btn_type4.performClick();
-//                    break;
-
-                /*Go Pay view Click handling start*/
-
-                case R.id.viewTransactionsBtnArea:
-                    btn_type1.performClick();
-                    break;
-
-                case R.id.infoArea:
-                    animateDialog(infoArea);
-                    break;
-                case R.id.resendOtpArea:
-
-                    if (!isClicked) {
-                        isClicked = true;
-                        isRegenerate = "Yes";
-                        transferState = "ENTER_AMOUNT";
-                        transferMoneyToWallet();
-                    }
-                    break;
-
-                case R.id.addMoneyArea:
-                    openAddMoneyDialog();
-                    break;
-                case R.id.transerArea:
-                    openTransferDialog();
-                    break;
-                case R.id.TransactionArea:
-                    new StartActProcess(getActContext()).startAct(MyWalletHistoryActivity.class);
-                    break;
-
-                /*Go Pay view Click handling end*/
+                new StartActProcess(getActContext()).startActWithData(WithdrawBalanceActivity.class, bundle);
+            } else if (viewId == R.id.viewTransactionsTxt) {
+                new StartActProcess(getActContext()).startAct(MyWalletHistoryActivity.class);
+            } else if (viewId == R.id.ic_back_arrow) {
+                goback();
+            } else if (viewId == R.id.viewTransactionsBtnArea) {
+                btn_type1.performClick();
+            } else if (viewId == R.id.infoArea) {
+                animateDialog(infoArea);
+            } else if (viewId == R.id.resendOtpArea) {
+                if (!isClicked) {
+                    isClicked = true;
+                    isRegenerate = "Yes";
+                    transferState = "ENTER_AMOUNT";
+                    transferMoneyToWallet();
+                }
+            } else if (viewId == R.id.addMoneyArea) {
+                openAddMoneyDialog();
+            } else if (viewId == R.id.transerArea) {
+                openTransferDialog();
+            } else if (viewId == R.id.TransactionArea) {
+                new StartActProcess(getActContext()).startAct(MyWalletHistoryActivity.class);
             }
+
         }
 
     }
@@ -1518,7 +1487,7 @@ public class MyWalletActivity extends AppCompatActivity implements CompoundButto
         autofitEditText.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2)});
         rechargeBox.setBackgroundResource(android.R.color.transparent);
         rechargeBox.setHideUnderline(true);
-        rechargeBox.setTextSize(getActContext().getResources().getDimension(R.dimen._18ssp));
+        rechargeBox.setTextSize(getActContext().getResources().getDimension(com.intuit.ssp.R.dimen._18ssp));
         autofitEditText.setText(defaultAmountVal);
         autofitEditText.setTextColor(getActContext().getResources().getColor(R.color.black));
         rechargeBox.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -1779,7 +1748,7 @@ public class MyWalletActivity extends AppCompatActivity implements CompoundButto
         autofitEditText.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2)});
         rechargeBox.setBackgroundResource(android.R.color.transparent);
         rechargeBox.setHideUnderline(true);
-        rechargeBox.setTextSize(getActContext().getResources().getDimension(R.dimen._18ssp));
+        rechargeBox.setTextSize(getActContext().getResources().getDimension(com.intuit.ssp.R.dimen._18ssp));
         autofitEditText.setText(defaultAmountVal);
 
         rechargeBox.setTextColor(getActContext().getResources().getColor(R.color.black));

@@ -1,10 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-//apply plugin: 'io.fabric'
 apply plugin: 'realm-android'
-// Apply the Crashlytics Gradle plugin
 apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android'
 
 android {
 /*
@@ -13,7 +11,7 @@ android {
         all*.exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
 */
-
+    namespace 'ciride.driver'
     configurations {
         all {
             exclude module: 'okhttp'
@@ -29,8 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     android {
@@ -42,12 +40,12 @@ android {
         }
     }
 
-    compileSdkVersion 33
+    compileSdkVersion 34
     buildToolsVersion '30.0.2'
     defaultConfig {
         applicationId "ciride.driver"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 2
         versionName "1.1"
         multiDexEnabled true
@@ -84,7 +82,7 @@ android {
             buildConfigField "String", "USER_ID_KEY", "\"iDriverId\""
             minifyEnabled true
          ///   proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-///            signingConfig signingConfigs.config
+/            signingConfig signingConfigs.config
         }
         debug {
             debuggable true
@@ -92,7 +90,7 @@ android {
             buildConfigField "String", "USER_ID_KEY", "\"iDriverId\""
             minifyEnabled false
          ///   proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-     ///       signingConfig signingConfigs.config
+            signingConfig signingConfigs.config
         }
     }
     dexOptions {

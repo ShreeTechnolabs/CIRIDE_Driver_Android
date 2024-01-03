@@ -106,7 +106,7 @@ public class AccountverificationActivity extends BaseActivity {
         inviteQueryImg.setOnClickListener(new setOnClickList());
 
         inviteCodeArea = (LinearLayout) findViewById(R.id.inviteCodeArea);
-        int paddingValStart = (int) getResources().getDimension(R.dimen._35sdp);
+        int paddingValStart = (int) getResources().getDimension(com.intuit.sdp.R.dimen._35sdp);
         if (generalFunc.isRTLmode()) {
 
             invitecodeBox.setPaddings(paddingValStart, 0, 0, 0);
@@ -133,7 +133,7 @@ public class AccountverificationActivity extends BaseActivity {
 
         vSImage = generalFunc.retrieveValue(Utils.DefaultCountryImage);
         Picasso.get().load(vSImage).into(countryimage);
-        int paddingVal = (int) getResources().getDimension(R.dimen._35sdp);
+        int paddingVal = (int) getResources().getDimension(com.intuit.sdp.R.dimen._35sdp);
         countryBox.setPaddings(generalFunc.isRTLmode() ? 0 : paddingVal, 0, generalFunc.isRTLmode() ? paddingVal : 0, 0);
 
         vCountryCode = data.get(Utils.DefaultCountryCode);
@@ -380,23 +380,5 @@ public class AccountverificationActivity extends BaseActivity {
     }
 
     public void manageSinchClient() {
-        if (getSinchServiceInterface() != null && !getSinchServiceInterface().isStarted()) {
-            getSinchServiceInterface().startClient("Driver" + "_" + generalFunc.getMemberId());
-
-            GetDeviceToken getDeviceToken = new GetDeviceToken(generalFunc);
-
-            getDeviceToken.setDataResponseListener(vDeviceToken -> {
-
-                if (!vDeviceToken.equals("")) {
-                    try {
-                        getSinchServiceInterface().getSinchClient().registerPushNotificationData(vDeviceToken.getBytes());
-
-                    } catch (Exception e) {
-
-                    }
-                }
-            });
-            getDeviceToken.execute();
-        }
     }
 }

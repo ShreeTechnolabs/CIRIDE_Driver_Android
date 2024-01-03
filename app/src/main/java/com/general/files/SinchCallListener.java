@@ -27,8 +27,4 @@ public class SinchCallListener implements CallListener {
     @Override
     public void onCallProgressing(Call progressingCall) {
     }
-
-    @Override
-    public void onShouldSendPushNotification(Call call, List<PushPair> pushPairs) {
-    }
 }

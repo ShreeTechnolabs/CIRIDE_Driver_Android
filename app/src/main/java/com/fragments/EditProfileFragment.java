@@ -116,11 +116,11 @@ public class EditProfileFragment extends Fragment {
         btn_type2 = ((MaterialRippleLayout) view.findViewById(R.id.btn_type2)).getChildView();
         vSImage = generalFunc.retrieveValue(Utils.DefaultCountryImage);
 
-        int imagewidth = (int) getResources().getDimension(R.dimen._30sdp);
-        int imageheight = (int)getResources().getDimension(R.dimen._20sdp);
+        int imagewidth = (int) getResources().getDimension(com.intuit.sdp.R.dimen._30sdp);
+        int imageheight = (int)getResources().getDimension(com.intuit.sdp.R.dimen._20sdp);
         Picasso.get().load(Utils.getResizeImgURL(getActContext(),vSImage,imagewidth,imageheight)).into(countryimage);
-        int paddingValStart = (int) getResources().getDimension(R.dimen._35sdp);
-        int paddingValEnd = (int) getResources().getDimension(R.dimen._12sdp);
+        int paddingValStart = (int) getResources().getDimension(com.intuit.sdp.R.dimen._35sdp);
+        int paddingValEnd = (int) getResources().getDimension(com.intuit.sdp.R.dimen._12sdp);
         if (generalFunc.isRTLmode()){
             countryBox.setPaddings(paddingValEnd, 0, paddingValStart, 0);
         }else {
@@ -235,8 +235,8 @@ public class EditProfileFragment extends Fragment {
 
         if (generalFunc.getJsonValueStr("vSCountryImage", userProfileJson) != null && !generalFunc.getJsonValueStr("vSCountryImage", userProfileJson).equalsIgnoreCase("")) {
             vSImage = generalFunc.getJsonValueStr("vSCountryImage", userProfileJson);
-            int imagewidth = (int) getResources().getDimension(R.dimen._30sdp);
-            int imageheight = (int)getResources().getDimension(R.dimen._20sdp);
+            int imagewidth = (int) getResources().getDimension(com.intuit.sdp.R.dimen._30sdp);
+            int imageheight = (int)getResources().getDimension(com.intuit.sdp.R.dimen._20sdp);
             Picasso.get().load(Utils.getResizeImgURL(getActContext(),vSImage,imagewidth,imageheight)).into(countryimage);
 
 

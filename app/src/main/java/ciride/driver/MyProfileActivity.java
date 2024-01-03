@@ -135,7 +135,7 @@ public class MyProfileActivity extends AppCompatActivity {
         userImgArea.setOnClickListener(new setOnClickList());
 
 
-        new CreateRoundedView(getResources().getColor(R.color.white), Utils.dipToPixels(getActContext(), getResources().getDimension(R.dimen._15sdp)), 0,
+        new CreateRoundedView(getResources().getColor(R.color.white), Utils.dipToPixels(getActContext(), getResources().getDimension(com.intuit.sdp.R.dimen._15sdp)), 0,
                 Color.parseColor("#00000000"), editIconImgView);
 
         editIconImgView.setColorFilter(getResources().getColor(R.color.appThemeColor_1));
@@ -568,43 +568,36 @@ public class MyProfileActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(getActContext());
-            switch (view.getId()) {
-                case R.id.backImgView:
+            int viewId = view.getId();
 
-                    MyProfileActivity.super.onBackPressed();
-                    break;
+            if (viewId == R.id.backImgView) {
+                MyProfileActivity.super.onBackPressed();
+            } else if (viewId == R.id.userImgArea) {
+                if (isProfileEditRestricted()) {
+                    boolean isProfileImageBlank = isProfileImageBlank();
 
-                case R.id.userImgArea:
-
-                    if (isProfileEditRestricted()) {
-                        boolean isProfileImageBlank = isProfileImageBlank();
-
-                        if (isProfileImageBlank) {
-                            generalFunc.showGeneralMessage("", generalFunc.retrieveLangLBl("", "LBL_PROFILE_IMAGE_BLOCK"), "", generalFunc.retrieveLangLBl("", "LBL_BTN_OK_TXT"),
-                                    buttonId -> {
-                                        if (generalFunc.isPermisionGranted()) {
-                                            new ImageSourceDialog().run();
-                                        }
-
-                                    });
-                        } else if (!isProfileImageBlank) {
-                            generalFunc.showGeneralMessage("", generalFunc.retrieveLangLBl("", "LBL_EDIT_PROFILE_DISABLED"), "", generalFunc.retrieveLangLBl("", "LBL_BTN_OK_TXT"),
-                                    buttonId -> {
-
-
-                                    });
-                        }
-                    }else {
-                        if (generalFunc.isCameraStoragePermissionGranted()) {
-                            new ImageSourceDialog().run();
-                        } else {
-                            generalFunc.showMessage(getCurrView(), "Allow this app to use camera.");
-                        }
-
+                    if (isProfileImageBlank) {
+                        generalFunc.showGeneralMessage("", generalFunc.retrieveLangLBl("", "LBL_PROFILE_IMAGE_BLOCK"), "", generalFunc.retrieveLangLBl("", "LBL_BTN_OK_TXT"),
+                                buttonId -> {
+                                    if (generalFunc.isPermisionGranted()) {
+                                        new ImageSourceDialog().run();
+                                    }
+                                });
+                    } else if (!isProfileImageBlank) {
+                        generalFunc.showGeneralMessage("", generalFunc.retrieveLangLBl("", "LBL_EDIT_PROFILE_DISABLED"), "", generalFunc.retrieveLangLBl("", "LBL_BTN_OK_TXT"),
+                                buttonId -> {
+                                    // Handle button click if needed.
+                                });
                     }
-                    break;
-
+                } else {
+                    if (generalFunc.isCameraStoragePermissionGranted()) {
+                        new ImageSourceDialog().run();
+                    } else {
+                        generalFunc.showMessage(getCurrView(), "Allow this app to use camera.");
+                    }
+                }
             }
+
         }
     }
 

@@ -164,20 +164,6 @@ public class LauncherActivity extends BaseActivity implements ProviderInstaller.
                 new Handler().postDelayed(() -> continueProcess(), 1500);
             } else if (getSinchServiceInterface() != null) {
                 autoLogin();
-                if (!getSinchServiceInterface().isStarted()) {
-                    getSinchServiceInterface().startClient(Utils.userType + "_" + generalFunc.getMemberId());
-                    GetDeviceToken getDeviceToken = new GetDeviceToken(generalFunc);
-                    getDeviceToken.setDataResponseListener(vDeviceToken -> {
-                        if (!vDeviceToken.equals("")) {
-                            try {
-                                getSinchServiceInterface().getSinchClient().registerPushNotificationData(vDeviceToken.getBytes());
-                            } catch (Exception ignored) {
-
-                            }
-                        }
-                    });
-                    getDeviceToken.execute();
-                }
             } else {
                 if (this.response_str_autologin.trim().equalsIgnoreCase("")) {
                     autoLogin();

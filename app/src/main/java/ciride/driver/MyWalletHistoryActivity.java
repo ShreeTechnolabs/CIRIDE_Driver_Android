@@ -103,12 +103,12 @@ public class MyWalletHistoryActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(MyWalletHistoryActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    MyWalletHistoryActivity.super.onBackPressed();
-                    break;
+            int viewId = view.getId();
 
+            if (viewId == R.id.backImgView) {
+                MyWalletHistoryActivity.super.onBackPressed();
             }
+
         }
     }
 

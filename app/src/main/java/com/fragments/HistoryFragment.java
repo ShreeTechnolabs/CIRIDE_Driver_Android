@@ -371,18 +371,18 @@ public class HistoryFragment extends Fragment implements MyHistoryRecycleAdapter
         RelativeLayout commentArea = (RelativeLayout) dialogView.findViewById(R.id.commentArea);
         reasonBox.setHideUnderline(true);
         if (generalFunc.isRTLmode()) {
-            reasonBox.setPaddings(0, 0, (int) getResources().getDimension(R.dimen._10sdp), 0);
+            reasonBox.setPaddings(0, 0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0);
         } else {
-            reasonBox.setPaddings((int) getResources().getDimension(R.dimen._10sdp), 0, 0, 0);
+            reasonBox.setPaddings((int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0, 0, 0);
         }
 
         reasonBox.setSingleLine(false);
         reasonBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         reasonBox.setGravity(Gravity.TOP);
         if (generalFunc.isRTLmode()) {
-            reasonBox.setPaddings(0, 0, (int) getResources().getDimension(R.dimen._10sdp), 0);
+            reasonBox.setPaddings(0, 0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0);
         } else {
-            reasonBox.setPaddings((int) getResources().getDimension(R.dimen._10sdp), 0, 0, 0);
+            reasonBox.setPaddings((int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0, 0, 0);
         }
 
         reasonBox.setVisibility(View.GONE);
@@ -1112,11 +1112,11 @@ public class HistoryFragment extends Fragment implements MyHistoryRecycleAdapter
 
     @Override
     public void onCalendarTitleViewClick() {
-        if (calendar_view.findViewById(R.id.weekLayout).getVisibility() == View.VISIBLE) {
+        /*if (calendar_view.findViewById(R.id.weekLayout).getVisibility() == View.VISIBLE) {
             showHideCalender(false);
         } else {
             showHideCalender(true);
-        }
+        }*/
     }
 
     @Override

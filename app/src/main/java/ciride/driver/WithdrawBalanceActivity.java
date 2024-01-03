@@ -244,12 +244,12 @@ public class WithdrawBalanceActivity extends AppCompatActivity {
         if (vAccountNumber.equalsIgnoreCase("no")) {
             accountDetailsAdded = false;
             //changeAccountDetails.setText(generalFunc.retrieveLangLBl("", "LBL_ACTION_ADD "));
-            // changeAccountDetails.setTextSize(getResources().getDimension(R.dimen._4ssp));
+            // changeAccountDetails.setTextSize(getResources().getDimension(com.intuit.sdp.R.dimen._4ssp));
             addaccountImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_pic_add));
         } else {
             accountDetailsAdded = true;
             // changeAccountDetails.setText(generalFunc.retrieveLangLBl("", "LBL_CHANGE "));
-            // changeAccountDetails.setTextSize(getResources().getDimension(R.dimen._4ssp));
+            // changeAccountDetails.setTextSize(getResources().getDimension(com.intuit.sdp.R.dimen._4ssp));
             addaccountImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_edit));
 
         }
@@ -331,24 +331,16 @@ public class WithdrawBalanceActivity extends AppCompatActivity {
                 }
             }
 
-            switch (i) {
-
-                case R.id.readFAQ:
-                    new StartActProcess(getActContext()).startAct(ContactUsActivity.class);
-
-                    break;
-                case R.id.support:
-                    new StartActProcess(getActContext()).startAct(HelpActivity.class);
-
-                    break;
-                case R.id.backImgView:
-                    WithdrawBalanceActivity.super.onBackPressed();
-                    break;
-                case R.id.nonwithdrawAmountTitle:
-                    Toast.makeText(getActContext(), "Clicked", Toast.LENGTH_LONG).show();
-                    break;
-
+            if (i == R.id.readFAQ) {
+                new StartActProcess(getActContext()).startAct(ContactUsActivity.class);
+            } else if (i == R.id.support) {
+                new StartActProcess(getActContext()).startAct(HelpActivity.class);
+            } else if (i == R.id.backImgView) {
+                WithdrawBalanceActivity.super.onBackPressed();
+            } else if (i == R.id.nonwithdrawAmountTitle) {
+                Toast.makeText(getActContext(), "Clicked", Toast.LENGTH_LONG).show();
             }
+
 
         }
     }
@@ -362,7 +354,7 @@ public class WithdrawBalanceActivity extends AppCompatActivity {
             accountHTxt.setText(data.getStringExtra("vAccountNumber"));
             accountDetailsAdded = true;
             // changeAccountDetails.setText(generalFunc.retrieveLangLBl("", "LBL_CHANGE "));
-            // changeAccountDetails.setTextSize(getResources().getDimension(R.dimen._4ssp));
+            // changeAccountDetails.setTextSize(getResources().getDimension(com.intuit.sdp.R.dimen._4ssp));
             addaccountImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_edit));
 
         }

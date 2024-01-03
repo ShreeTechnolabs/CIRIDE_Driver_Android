@@ -158,12 +158,12 @@ public class StaticPageActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(StaticPageActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    StaticPageActivity.super.onBackPressed();
-                    break;
+            int viewId = view.getId();
 
+            if (viewId == R.id.backImgView) {
+                StaticPageActivity.super.onBackPressed();
             }
+
         }
     }
 

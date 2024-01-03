@@ -205,12 +205,6 @@ public class MyApp extends Application {
         try {
             if (MyApp.getInstance().getCurrentAct() instanceof MainActivity) {
                 MainActivity mainActivity = (MainActivity) MyApp.getInstance().getCurrentAct();
-                if (new AppFunctions(mainActivity).checkSinchInstance(mainActivity != null ? mainActivity.getSinchServiceInterface() : null)) {
-                    mainActivity.getSinchServiceInterface().getSinchClient().setSupportPushNotifications(false);
-                    mainActivity.getSinchServiceInterface().getSinchClient().setSupportManagedPush(false);
-                    mainActivity.getSinchServiceInterface().getSinchClient().unregisterManagedPush();
-                    mainActivity.getSinchServiceInterface().getSinchClient().unregisterPushNotificationData();
-                }
             }
         } catch (Exception e) {
 

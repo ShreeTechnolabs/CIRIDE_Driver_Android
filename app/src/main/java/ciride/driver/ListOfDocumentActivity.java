@@ -254,11 +254,12 @@ public class ListOfDocumentActivity extends AppCompatActivity implements ListOfD
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(ListOfDocumentActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    ListOfDocumentActivity.super.onBackPressed();
-                    break;
+            int viewId = view.getId();
+
+            if (viewId == R.id.backImgView) {
+                ListOfDocumentActivity.super.onBackPressed();
             }
+
         }
     }
 

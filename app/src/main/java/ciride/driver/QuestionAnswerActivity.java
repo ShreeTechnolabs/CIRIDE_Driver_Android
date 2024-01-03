@@ -155,16 +155,14 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(QuestionAnswerActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    QuestionAnswerActivity.super.onBackPressed();
-                    break;
-                case R.id.contact_us_btn:
-                    new StartActProcess(getActContext()).startAct(ContactUsActivity.class);
-                    break;
+            int viewId = view.getId();
 
-
+            if (viewId == R.id.backImgView) {
+                QuestionAnswerActivity.super.onBackPressed();
+            } else if (viewId == R.id.contact_us_btn) {
+                new StartActProcess(getActContext()).startAct(ContactUsActivity.class);
             }
+
         }
     }
 }

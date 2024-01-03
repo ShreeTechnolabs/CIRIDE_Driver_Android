@@ -7,16 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.general.files.AudioPlayer;
 import com.general.files.GeneralFunctions;
 import com.general.files.MyApp;
 import com.general.files.SinchService;
-import com.general.files.StartActProcess;
 import com.sinch.android.rtc.PushPair;
 import com.sinch.android.rtc.calling.Call;
 import com.sinch.android.rtc.calling.CallEndCause;
@@ -205,7 +202,7 @@ public class CallScreenActivity extends BaseActivity {
 
     private void endCall() {
         mAudioPlayer.stopProgressTone();
-        getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunctions.retrieveLangLBl("", "LBL_CALL_ENDED"));
+//        getSinchServiceInterface().getSinchClient().setPushNotificationDisplayName(generalFunctions.retrieveLangLBl("", "LBL_CALL_ENDED"));
 
         Call call = getSinchServiceInterface().getCall(mCallId);
         if (call != null) {
@@ -258,11 +255,6 @@ public class CallScreenActivity extends BaseActivity {
         public void onCallProgressing(Call call) {
             //Log.d(TAG, "Call progressing");
             mAudioPlayer.playProgressTone();
-        }
-
-        @Override
-        public void onShouldSendPushNotification(Call call, List<PushPair> pushPairs) {
-            // Send a push through your push provider here, e.g. GCM
         }
     }
 }

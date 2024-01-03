@@ -186,7 +186,7 @@ public class SelectCountryActivity extends AppCompatActivity implements PinnedSe
                     pinnedSectionListAdapter.notifyDataSetChanged();
 
                     int sectionPosition = 0, listPosition = 0;
-                    int imagewidth = (int) getActContext().getResources().getDimension(R.dimen._30sdp);
+                    int imagewidth = (int) getActContext().getResources().getDimension(com.intuit.sdp.R.dimen._30sdp);
 
                     for (int i = 0; i < countryArr.length(); i++) {
                         JSONObject tempJson = generalFunc.getJsonObject(countryArr, i);
@@ -254,7 +254,7 @@ public class SelectCountryActivity extends AppCompatActivity implements PinnedSe
         int sectionPosition = 0, listPosition = 0;
 
         HashMap<Integer, CountryListItem> sectionMapData = new HashMap<>();
-        int imagewidth = (int) getActContext().getResources().getDimension(R.dimen._30sdp);
+        int imagewidth = (int) getActContext().getResources().getDimension(com.intuit.sdp.R.dimen._30sdp);
 
         if (countryArr == null) {
             return;
@@ -369,34 +369,31 @@ public class SelectCountryActivity extends AppCompatActivity implements PinnedSe
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(getActContext());
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    SelectCountryActivity.super.onBackPressed();
-                    break;
-                case R.id.cancelTxt:
-                    toolbarArea.setVisibility(View.VISIBLE);
-                    searcharea.setVisibility(View.GONE);
-                    searchTxt.setText("");
-//                    filterCountries("");
-                    Utils.hideKeyboard(getActContext());
-                    break;
-                case R.id.searchImgView:
-                    if (countryArr != null) {
-                        imageCancel.setVisibility(View.INVISIBLE);
-                        searcharea.setVisibility(View.VISIBLE);
-                        toolbarArea.setVisibility(View.GONE);
+            int viewId = view.getId();
 
-                        searchTxt.requestFocus();
-                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        if (imm != null) {
-                            imm.showSoftInput(searchTxt, InputMethodManager.SHOW_IMPLICIT);
-                        }
+            if (viewId == R.id.backImgView) {
+                SelectCountryActivity.super.onBackPressed();
+            } else if (viewId == R.id.cancelTxt) {
+                toolbarArea.setVisibility(View.VISIBLE);
+                searcharea.setVisibility(View.GONE);
+                searchTxt.setText("");
+                Utils.hideKeyboard(getActContext());
+            } else if (viewId == R.id.searchImgView) {
+                if (countryArr != null) {
+                    imageCancel.setVisibility(View.INVISIBLE);
+                    searcharea.setVisibility(View.VISIBLE);
+                    toolbarArea.setVisibility(View.GONE);
+
+                    searchTxt.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.showSoftInput(searchTxt, InputMethodManager.SHOW_IMPLICIT);
                     }
-                    break;
-                case R.id.imageCancel:
-                    searchTxt.setText("");
-                    break;
+                }
+            } else if (viewId == R.id.imageCancel) {
+                searchTxt.setText("");
             }
+
         }
     }
 

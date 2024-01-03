@@ -64,12 +64,12 @@ public class NotificationDetailsActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(NotificationDetailsActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    NotificationDetailsActivity.super.onBackPressed();
-                    break;
+            int viewId = view.getId();
 
+            if (viewId == R.id.backImgView) {
+                NotificationDetailsActivity.super.onBackPressed();
             }
+
         }
     }
 }

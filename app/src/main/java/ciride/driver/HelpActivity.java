@@ -188,12 +188,12 @@ public class HelpActivity extends AppCompatActivity implements HelpCategoryRecyc
         @Override
         public void onClick(View view) {
             Utils.hideKeyboard(HelpActivity.this);
-            switch (view.getId()) {
-                case R.id.backImgView:
-                    HelpActivity.super.onBackPressed();
-                    break;
+            int viewId = view.getId();
 
+            if (viewId == R.id.backImgView) {
+                HelpActivity.super.onBackPressed();
             }
+
         }
     }
 

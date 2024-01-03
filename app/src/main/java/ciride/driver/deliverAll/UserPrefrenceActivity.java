@@ -73,7 +73,7 @@ public class UserPrefrenceActivity extends AppCompatActivity {
         try {
             DeliveryPreferences = new JSONObject(getIntent().getStringExtra("DeliveryPreferences"));
             getUserPreference(DeliveryPreferences);
-            int imageWidth = (int) this.getResources().getDimension(R.dimen._90sdp);
+            int imageWidth = (int) this.getResources().getDimension(com.intuit.sdp.R.dimen._90sdp);
             Picasso.get().load(Utils.getResizeImgURL(getActContext(), vImageDeliveryPref, imageWidth, imageWidth)).placeholder(R.mipmap.ic_no_icon).error(R.mipmap.ic_no_icon).into(iv_preferenceImg);
         } catch (JSONException e) {
             e.printStackTrace();

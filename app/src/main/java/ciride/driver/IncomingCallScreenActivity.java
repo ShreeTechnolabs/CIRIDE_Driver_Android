@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.general.files.AudioPlayer;
 import com.general.files.GeneralFunctions;
@@ -24,8 +22,6 @@ import com.view.CreateRoundedView;
 import com.view.MButton;
 import com.view.MTextView;
 import com.view.SelectableRoundedImageView;
-
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -164,29 +160,23 @@ public class IncomingCallScreenActivity extends BaseActivity {
         public void onCallProgressing(Call call) {
             Log.d(TAG, "Call progressing");
         }
-
-        @Override
-        public void onShouldSendPushNotification(Call call, List<PushPair> pushPairs) {
-            // Send a push through your push provider here, e.g. GCM
-        }
     }
 
     private OnClickListener mClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.answerButton:
+            int viewId = v.getId();
 
-                    if (generalFunctions.isCallPermissionGranted(false) == false) {
-                        generalFunctions.isCallPermissionGranted(true);
-                        return;
-                    }
-                    answerClicked();
-                    break;
-                case R.id.declineButton:
-                    declineClicked();
-                    break;
+            if (viewId == R.id.answerButton) {
+                if (!generalFunctions.isCallPermissionGranted(false)) {
+                    generalFunctions.isCallPermissionGranted(true);
+                    return;
+                }
+                answerClicked();
+            } else if (viewId == R.id.declineButton) {
+                declineClicked();
             }
+
         }
     };
 }

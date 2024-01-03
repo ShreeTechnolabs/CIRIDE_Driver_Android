@@ -108,9 +108,9 @@ public class TripRatingActivity extends AppCompatActivity implements OnMapReadyC
 
         commentBox.setHideUnderline(true);
         if (generalFunc.isRTLmode()) {
-            commentBox.setPaddings(0, 0, (int) getResources().getDimension(R.dimen._10sdp), 0);
+            commentBox.setPaddings(0, 0, (int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0);
         } else {
-            commentBox.setPaddings((int) getResources().getDimension(R.dimen._10sdp), 0, 0, 0);
+            commentBox.setPaddings((int) getResources().getDimension(com.intuit.sdp.R.dimen._10sdp), 0, 0, 0);
         }
 
         commentBox.setSingleLine(false);

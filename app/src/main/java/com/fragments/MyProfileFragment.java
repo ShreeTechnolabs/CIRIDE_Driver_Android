@@ -507,13 +507,13 @@ public class MyProfileFragment extends Fragment {
 
                     Log.i(TAG, "Scroll DOWN");
 
-                    if (scrollY > getResources().getDimension(R.dimen._75sdp)) {
+                    if (scrollY > getResources().getDimension(com.intuit.sdp.R.dimen._75sdp)) {
                         toolbar_profile.setVisibility(View.VISIBLE);
                     }
                 }
                 if (scrollY < oldScrollY) {
                     Log.i(TAG, "Scroll UP");
-                    if (scrollY < getResources().getDimension(R.dimen._75sdp)) {
+                    if (scrollY < getResources().getDimension(com.intuit.sdp.R.dimen._75sdp)) {
                         toolbar_profile.setVisibility(View.GONE);
                     }
 
@@ -1138,252 +1138,154 @@ public class MyProfileFragment extends Fragment {
         public void onClick(View view) {
             Utils.hideKeyboard(getActContext());
             Bundle bn = new Bundle();
-            switch (view.getId()) {
-                case R.id.backImg:
-                    //onBackPressed();
-                    break;
-                case R.id.infoImg:
-                    TrendyDialog customDialog = new TrendyDialog(getActContext());
-                    customDialog.setDetails(generalFunc.retrieveLangLBl("","LBL_EMAIL_VERIFY"), generalFunc.retrieveLangLBl("", "LBL_EMAIL_VERIFY_NOTE_TXT"), generalFunc.retrieveLangLBl("Continue", "LBL_CONTINUE_BTN"), true, getActContext().getResources().getDrawable(R.drawable.ic_verify_email));
-                    customDialog.setNegativeBtnText(generalFunc.retrieveLangLBl("Cancel","LBL_CANCEL_TXT"));
-                    customDialog.setNegativeButtonVisibility(View.VISIBLE);
-                    customDialog.setTitleTextVisibility(View.VISIBLE);
-                    customDialog.showDialog();
-                    customDialog.setNegativeBtnClick(new Closure() {
-                        @Override
-                        public void exec() {
+            int viewId = view.getId();
 
-                        }
-                    });
-                    customDialog.setPositiveBtnClick(new com.general.files.Closure() {
-                        @Override
-                        public void exec() {
-                            verifyEmailArea.performClick();
-                        }
-                    });
-                    break;
-                case R.id.personalDetailsArea:
-/*
-                    obj_userProfile = generalFunc.getJsonObject(generalFunc.retrieveValue(Utils.USER_PROFILE_JSON));
+            if (viewId == R.id.backImg) {
+                //onBackPressed();
+            } else if (viewId == R.id.infoImg) {
+                TrendyDialog customDialog = new TrendyDialog(getActContext());
+                customDialog.setDetails(generalFunc.retrieveLangLBl("", "LBL_EMAIL_VERIFY"), generalFunc.retrieveLangLBl("", "LBL_EMAIL_VERIFY_NOTE_TXT"), generalFunc.retrieveLangLBl("Continue", "LBL_CONTINUE_BTN"), true, getActContext().getResources().getDrawable(R.drawable.ic_verify_email));
+                customDialog.setNegativeBtnText(generalFunc.retrieveLangLBl("Cancel", "LBL_CANCEL_TXT"));
+                customDialog.setNegativeButtonVisibility(View.VISIBLE);
+                customDialog.setTitleTextVisibility(View.VISIBLE);
+                customDialog.showDialog();
+                customDialog.setNegativeBtnClick(() -> {
+                    // Negative button click action
+                });
+                customDialog.setPositiveBtnClick(() -> verifyEmailArea.performClick());
+            } else if (viewId == R.id.personalDetailsArea) {
+                if (generalFunc.getMemberId().equals("")) {
+                    new StartActProcess(getActContext()).startAct(AppLoginActivity.class);
+                } else {
+                    new StartActProcess(getActContext()).startActForResult(MyProfileActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
+                }
+            } else if (viewId == R.id.editProfileImage) {
+                obj_userProfile = generalFunc.getJsonObject(generalFunc.retrieveValue(Utils.USER_PROFILE_JSON));
 
-                    if (generalFunc.retrieveValue(Utils.FEMALE_RIDE_REQ_ENABLE).equalsIgnoreCase("yes") && !generalFunc.isDeliverOnlyEnabled()) {
+                String FEMALE_RIDE_REQ_ENABLE = generalFunc.retrieveValue(Utils.FEMALE_RIDE_REQ_ENABLE);
+                String IS_RIDE_MODULE_AVAIL = generalFunc.retrieveValue("IS_RIDE_MODULE_AVAIL");
+                String eGender = generalFunc.getJsonValueStr("eGender", obj_userProfile);
 
-                        String STORE_PERSONAL_DRIVER = generalFunc.getJsonValue("STORE_PERSONAL_DRIVER",userProfileJson);
-                        if (generalFunc.getJsonValueStr("eGender", obj_userProfile).equals("")
-                                && STORE_PERSONAL_DRIVER.equalsIgnoreCase("No")) {
-                            genderDailog();
+                if (FEMALE_RIDE_REQ_ENABLE.equalsIgnoreCase("yes") && !generalFunc.isDeliverOnlyEnabled() && IS_RIDE_MODULE_AVAIL.equalsIgnoreCase("Yes")) {
 
-                        } else {
-                            new StartActProcess(getActContext()).startActForResult(MyProfileActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
-                        }
-                    } else {
+                    String STORE_PERSONAL_DRIVER = generalFunc.getJsonValue("STORE_PERSONAL_DRIVER", userProfileJson);
+                    if (eGender.equals("") && STORE_PERSONAL_DRIVER.equalsIgnoreCase("No")) {
+                        genderDailog();
+                    } else if (!FEMALE_RIDE_REQ_ENABLE.equalsIgnoreCase("yes") || eGender.equalsIgnoreCase("Male")) {
                         new StartActProcess(getActContext()).startActForResult(MyProfileActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
-                    }*/
-
-
-                    if (generalFunc.getMemberId().equals("")) {
-                        new StartActProcess(getActContext()).startAct(AppLoginActivity.class);
                     } else {
-                        new StartActProcess(getActContext()).startActForResult(MyProfileActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
+                        new StartActProcess(getActContext()).startAct(PrefranceActivity.class);
                     }
-
-                    break;
-                case R.id.editProfileImage:
-
-                    obj_userProfile = generalFunc.getJsonObject(generalFunc.retrieveValue(Utils.USER_PROFILE_JSON));
-
-                    String FEMALE_RIDE_REQ_ENABLE=generalFunc.retrieveValue(Utils.FEMALE_RIDE_REQ_ENABLE);
-                    String IS_RIDE_MODULE_AVAIL=generalFunc.retrieveValue("IS_RIDE_MODULE_AVAIL");
-                    String eGender=generalFunc.getJsonValueStr("eGender", obj_userProfile);
-
-                    if (FEMALE_RIDE_REQ_ENABLE.equalsIgnoreCase("yes") && !generalFunc.isDeliverOnlyEnabled() && IS_RIDE_MODULE_AVAIL.equalsIgnoreCase("Yes")) {
-
-                        String STORE_PERSONAL_DRIVER = generalFunc.getJsonValue("STORE_PERSONAL_DRIVER",userProfileJson);
-                        if (eGender.equals("")
-                                && STORE_PERSONAL_DRIVER.equalsIgnoreCase("No")) {
-                            genderDailog();
-
-                        } else if (!FEMALE_RIDE_REQ_ENABLE.equalsIgnoreCase("yes") || eGender.equalsIgnoreCase("Male")){
-                            new StartActProcess(getActContext()).startActForResult(MyProfileActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
-                        }else
-                        {
-                            new StartActProcess(getActContext()).startAct(PrefranceActivity.class);
-                        }
+                } else {
+                    new StartActProcess(getActContext()).startActForResult(MyProfileActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
+                }
+            } else if (viewId == R.id.bookingArea || viewId == R.id.myBookingArea) {
+                new StartActProcess(getActContext()).startActForResult(BookingsActivity.class, bn, MY_BOOKING_REQ_CODE);
+            } else if (viewId == R.id.notificationArea) {
+                new StartActProcess(getActContext()).startAct(NotificationActivity.class);
+            } else if (viewId == R.id.paymentMethodArea) {
+                bn.putBoolean("fromcabselection", false);
+                new StartActProcess(getActContext()).startActForResult(CardPaymentActivity.class, bn, Utils.CARD_PAYMENT_REQ_CODE);
+            } else if (viewId == R.id.privacyArea) {
+                bn.putString("staticpage", "33");
+                new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
+            } else if (viewId == R.id.changesPasswordArea) {
+                showPasswordBox();
+            } else if (viewId == R.id.changesCurrancyArea) {
+                showCurrencyList();
+            } else if (viewId == R.id.changeslanguageArea) {
+                showLanguageList();
+            } else if (viewId == R.id.termsArea) {
+                bn.putString("staticpage", "4");
+                new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
+            } else if (viewId == R.id.manageGalleryArea) {
+                // Action for manageGalleryArea
+            } else if (viewId == R.id.headerwalletArea || viewId == R.id.myWalletArea) {
+                new StartActProcess(getActContext()).startActForResult(MyWalletActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
+            } else if (viewId == R.id.topUpArea || viewId == R.id.addMoneyArea) {
+                bn.putBoolean("isAddMoney", true);
+                new StartActProcess(getActContext()).startActForResult(MyWalletActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
+            } else if (viewId == R.id.sendMoneyArea) {
+                bn.putBoolean("isSendMoney", true);
+                new StartActProcess(getActContext()).startActForResult(MyWalletActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
+            } else if (viewId == R.id.inviteArea || viewId == R.id.inviteFriendArea) {
+                new StartActProcess(getActContext()).startActWithData(InviteFriendsActivity.class, bn);
+            } else if (viewId == R.id.helpArea) {
+                new StartActProcess(getActContext()).startAct(HelpActivity.class);
+            } else if (viewId == R.id.liveChatArea) {
+                startChatActivity();
+            } else if (viewId == R.id.aboutusArea) {
+                bn.putString("staticpage", "1");
+                new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
+            } else if (viewId == R.id.contactUsArea) {
+                new StartActProcess(getActContext()).startAct(ContactUsActivity.class);
+            } else if (viewId == R.id.emeContactArea) {
+                new StartActProcess(getActContext()).startAct(EmergencyContactActivity.class);
+            } else if (viewId == R.id.bankDetailsArea) {
+                new StartActProcess(getActContext()).startActWithData(BankDetailActivity.class, bn);
+            } else if (viewId == R.id.mySubArea) {
+                new StartActProcess(getActContext()).startAct(SubscriptionActivity.class);
+            } else if (viewId == R.id.myServiceArea) {
+                bn.putString("iDriverVehicleId", generalFunc.getJsonValueStr("iDriverVehicleId", obj_userProfile));
+                bn.putString("app_type", app_type);
+                if (generalFunc.isDeliverOnlyEnabled()) {
+                    new StartActProcess(getActContext()).startActWithData(ManageVehiclesActivity.class, bn);
+                } else {
+                    if (app_type.equalsIgnoreCase(Utils.CabGeneralType_UberX) || ((app_type.equalsIgnoreCase(Utils.CabGeneralTypeRide_Delivery_UberX) && isUfxServicesEnabled) && generalFunc.getJsonValueStr("eShowVehicles", obj_userProfile).equalsIgnoreCase("No"))) {
+                        bn.putString("UBERX_PARENT_CAT_ID", generalFunc.getJsonValueStr("UBERX_PARENT_CAT_ID", obj_userProfile));
+                    } else if ((app_type.equalsIgnoreCase(Utils.CabGeneralTypeRide_Delivery_UberX) && isUfxServicesEnabled) && generalFunc.getJsonValueStr("eShowVehicles", obj_userProfile).equalsIgnoreCase("Yes")) {
+                        bn.putString("apptype", app_type);
+                        bn.putString("selView", "vehicle");
+                        bn.putInt("totalVehicles", 1);
+                        bn.putString("UBERX_PARENT_CAT_ID", app_type.equalsIgnoreCase(Utils.CabGeneralTypeRide_Delivery_UberX) ? generalFunc.getJsonValueStr("UBERX_PARENT_CAT_ID", obj_userProfile) : "");
+                        new StartActProcess(getActContext()).startActWithData(UploadDocTypeWiseActivity.class, bn);
                     } else {
-                        new StartActProcess(getActContext()).startActForResult(MyProfileActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
-                    }
-
-                    break;
-                case R.id.bookingArea:
-                case R.id.myBookingArea:
-
-
-//                    new StartActProcess(getActContext()).startActForResult(HistoryActivity.class, bn, MY_BOOKING_REQ_CODE);
-                    new StartActProcess(getActContext()).startActForResult(BookingsActivity.class, bn, MY_BOOKING_REQ_CODE);
-                    break;
-
-
-                case R.id.notificationArea:
-                    new StartActProcess(getActContext()).startAct(NotificationActivity.class);
-                    break;
-
-
-                case R.id.paymentMethodArea:
-                    bn.putBoolean("fromcabselection", false);
-                    new StartActProcess(getActContext()).startActForResult(CardPaymentActivity.class, bn, Utils.CARD_PAYMENT_REQ_CODE);
-                    break;
-                case R.id.privacyArea:
-                    bn.putString("staticpage", "33");
-                    new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
-                    break;
-
-
-                case R.id.changesPasswordArea:
-                    showPasswordBox();
-                    break;
-                case R.id.changesCurrancyArea:
-                    showCurrencyList();
-                    break;
-                case R.id.changeslanguageArea:
-                    showLanguageList();
-                    break;
-                case R.id.termsArea:
-                    bn.putString("staticpage", "4");
-                    new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
-                    break;
-
-
-                case R.id.manageGalleryArea:
-                    break;
-
-
-                case R.id.headerwalletArea:
-                case R.id.myWalletArea:
-
-                    new StartActProcess(getActContext()).startActForResult(MyWalletActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
-                    break;
-
-                case R.id.topUpArea:
-                case R.id.addMoneyArea:
-                    bn.putBoolean("isAddMoney", true);
-                    new StartActProcess(getActContext()).startActForResult(MyWalletActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
-                    break;
-                case R.id.sendMoneyArea:
-                    bn.putBoolean("isSendMoney", true);
-                    new StartActProcess(getActContext()).startActForResult(MyWalletActivity.class, bn, Utils.MY_PROFILE_REQ_CODE);
-                    break;
-                case R.id.inviteArea:
-                case R.id.inviteFriendArea:
-                    new StartActProcess(getActContext()).startActWithData(InviteFriendsActivity.class, bn);
-
-                    break;
-                case R.id.helpArea:
-                    new StartActProcess(getActContext()).startAct(HelpActivity.class);
-                    break;
-                case R.id.liveChatArea:
-                    startChatActivity();
-                    break;
-                case R.id.aboutusArea:
-                    bn.putString("staticpage", "1");
-                    new StartActProcess(getActContext()).startActWithData(StaticPageActivity.class, bn);
-                    break;
-                case R.id.contactUsArea:
-                    new StartActProcess(getActContext()).startAct(ContactUsActivity.class);
-                    break;
-
-                case R.id.emeContactArea:
-                    new StartActProcess(getActContext()).startAct(EmergencyContactActivity.class);
-                    break;
-                case R.id.bankDetailsArea:
-                    new StartActProcess(getActContext()).startActWithData(BankDetailActivity.class, bn);
-                    break;
-
-                case R.id.mySubArea:
-                    new StartActProcess(getActContext()).startAct(SubscriptionActivity.class);
-                    break;
-
-                case R.id.myServiceArea:
-                    bn.putString("iDriverVehicleId", generalFunc.getJsonValueStr("iDriverVehicleId", obj_userProfile));
-                    bn.putString("app_type", app_type);
-
-                    if (generalFunc.isDeliverOnlyEnabled()) {
                         new StartActProcess(getActContext()).startActWithData(ManageVehiclesActivity.class, bn);
+                    }
+                }
+            } else if (viewId == R.id.manageDocArea) {
+                bn.putString("PAGE_TYPE", "Driver");
+                bn.putString("iDriverVehicleId", "");
+                bn.putString("doc_file", "");
+                bn.putString("iDriverVehicleId", "");
+                bn.putString("seltype", app_type);
+                new StartActProcess(getActContext()).startActWithData(ListOfDocumentActivity.class, bn);
+            } else if (viewId == R.id.userFeedbackArea) {
+                new StartActProcess(getActContext()).startActWithData(DriverFeedbackActivity.class, bn);
+            } else if (viewId == R.id.statisticsArea) {
+                new StartActProcess(getActContext()).startActWithData(StatisticsActivity.class, bn);
+            } else if (viewId == R.id.wayBillArea) {
+                JSONObject last_trip_data = generalFunc.getJsonObject("TripDetails", obj_userProfile);
+                if (generalFunc.getJsonValueStr("eSystem", last_trip_data).equalsIgnoreCase(Utils.eSystem_Type) || generalFunc.isDeliverOnlyEnabled()) {
+                    bn.putString("eSystem", "yes");
+                }
+                new StartActProcess(getActContext()).startActWithData(WayBillActivity.class, bn);
+            } else if (viewId == R.id.logOutArea) {
+                final GenerateAlertBox generateAlert = new GenerateAlertBox(getActContext());
+                generateAlert.setCancelable(false);
+                generateAlert.setBtnClickList(btn_id -> {
+                    if (btn_id == 0) {
+                        generateAlert.closeAlertBox();
                     } else {
-                        if (app_type.equalsIgnoreCase(Utils.CabGeneralType_UberX) || ((app_type.equalsIgnoreCase(Utils.CabGeneralTypeRide_Delivery_UberX) && isUfxServicesEnabled) && generalFunc.getJsonValueStr("eShowVehicles", obj_userProfile).equalsIgnoreCase("No"))) {
-                            bn.putString("UBERX_PARENT_CAT_ID", generalFunc.getJsonValueStr("UBERX_PARENT_CAT_ID", obj_userProfile));
-                        } else if ((app_type.equalsIgnoreCase(Utils.CabGeneralTypeRide_Delivery_UberX) && isUfxServicesEnabled) && generalFunc.getJsonValueStr("eShowVehicles", obj_userProfile).equalsIgnoreCase("Yes")) {
-                            bn.putString("apptype", app_type);
-                            bn.putString("selView", "vehicle");
-                            bn.putInt("totalVehicles", 1);
-                            bn.putString("UBERX_PARENT_CAT_ID", app_type.equalsIgnoreCase(Utils.CabGeneralTypeRide_Delivery_UberX) ? generalFunc.getJsonValueStr("UBERX_PARENT_CAT_ID", obj_userProfile) : "");
-                            new StartActProcess(getActContext()).startActWithData(UploadDocTypeWiseActivity.class, bn);
-
+                        if (internetConnection.isNetworkConnected()) {
+                            MyApp.getInstance().logOutFromDevice(false);
                         } else {
-                            new StartActProcess(getActContext()).startActWithData(ManageVehiclesActivity.class, bn);
+                            generalFunc.showMessage(logOutArea, generalFunc.retrieveLangLBl("", "LBL_NO_INTERNET_TXT"));
                         }
                     }
-
-                    break;
-
-                case R.id.manageDocArea:
-                    bn.putString("PAGE_TYPE", "Driver");
-                    bn.putString("iDriverVehicleId", "");
-                    bn.putString("doc_file", "");
-                    bn.putString("iDriverVehicleId", "");
-                    bn.putString("seltype", app_type);
-                    new StartActProcess(getActContext()).startActWithData(ListOfDocumentActivity.class, bn);
-                    break;
-                case R.id.userFeedbackArea:
-                    new StartActProcess(getActContext()).startActWithData(DriverFeedbackActivity.class, bn);
-                    break;
-
-                case R.id.myAvailArea:
-                    break;
-                case R.id.statisticsArea:
-                    new StartActProcess(getActContext()).startActWithData(StatisticsActivity.class, bn);
-                    break;
-                case R.id.wayBillArea:
-
-                    JSONObject last_trip_data = generalFunc.getJsonObject("TripDetails", obj_userProfile);
-                    if (generalFunc.getJsonValueStr("eSystem", last_trip_data).equalsIgnoreCase(Utils.eSystem_Type) || generalFunc.isDeliverOnlyEnabled()) {
-                        bn.putString("eSystem", "yes");
-                    }
-                    new StartActProcess(getActContext()).startActWithData(WayBillActivity.class, bn);
-                    break;
-                case R.id.logOutArea:
-
-                    final GenerateAlertBox generateAlert = new GenerateAlertBox(getActContext());
-                    generateAlert.setCancelable(false);
-                    generateAlert.setBtnClickList(btn_id -> {
-                        if (btn_id == 0) {
-                            generateAlert.closeAlertBox();
-                        } else {
-                            if (internetConnection.isNetworkConnected()) {
-                                MyApp.getInstance().logOutFromDevice(false);
-                            } else {
-                                generalFunc.showMessage(logOutArea, generalFunc.retrieveLangLBl("", "LBL_NO_INTERNET_TXT"));
-                            }
-                        }
-
-                    });
-                    generateAlert.setContentMessage(generalFunc.retrieveLangLBl("Logout", "LBL_LOGOUT"), generalFunc.retrieveLangLBl("Are you sure you want to logout?", "LBL_WANT_LOGOUT_APP_TXT"));
-                    generateAlert.setPositiveBtn(generalFunc.retrieveLangLBl("", "LBL_YES"));
-                    generateAlert.setNegativeBtn(generalFunc.retrieveLangLBl("", "LBL_NO"));
-                    generateAlert.showAlertBox();
-                    break;
-
-
-                case R.id.verifyEmailArea:
-                    bn.putString("msg", "DO_EMAIL_VERIFY");
-                    new StartActProcess(getActContext()).startActForResult(VerifyInfoActivity.class, bn, Utils.VERIFY_MOBILE_REQ_CODE);
-                    break;
-                case R.id.verifyMobArea:
-                    bn.putString("msg", "DO_PHONE_VERIFY");
-                    new StartActProcess(getActContext()).startActForResult(VerifyInfoActivity.class, bn, Utils.VERIFY_MOBILE_REQ_CODE);
-                    break;
-
-
+                });
+                generateAlert.setContentMessage(generalFunc.retrieveLangLBl("Logout", "LBL_LOGOUT"), generalFunc.retrieveLangLBl("Are you sure you want to logout?", "LBL_WANT_LOGOUT_APP_TXT"));
+                generateAlert.setPositiveBtn(generalFunc.retrieveLangLBl("", "LBL_YES"));
+                generateAlert.setNegativeBtn(generalFunc.retrieveLangLBl("", "LBL_NO"));
+                generateAlert.showAlertBox();
+            } else if (viewId == R.id.verifyEmailArea) {
+                bn.putString("msg", "DO_EMAIL_VERIFY");
+                new StartActProcess(getActContext()).startActForResult(VerifyInfoActivity.class, bn, Utils.VERIFY_MOBILE_REQ_CODE);
+            } else if (viewId == R.id.verifyMobArea) {
+                bn.putString("msg", "DO_PHONE_VERIFY");
+                new StartActProcess(getActContext()).startActForResult(VerifyInfoActivity.class, bn, Utils.VERIFY_MOBILE_REQ_CODE);
             }
+
         }
     }
 
