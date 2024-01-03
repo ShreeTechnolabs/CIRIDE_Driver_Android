@@ -82,7 +82,7 @@ android {
             buildConfigField "String", "USER_ID_KEY", "\"iDriverId\""
             minifyEnabled true
          ///   proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-/            signingConfig signingConfigs.config
+            signingConfig signingConfigs.config
         }
         debug {
             debuggable true

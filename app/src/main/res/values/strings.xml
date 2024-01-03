@@ -1,6 +1,7 @@
 <resources>
-    <string name="google_android_geo_api_key">AIzaSyAN8kjqxsuRtgcE5YF3pwoAbCNUzm-MnV4</string>
+<!--    <string name="google_android_geo_api_key">AIzaSyAN8kjqxsuRtgcE5YF3pwoAbCNUzm-MnV4</string>-->
 
+    <string name="google_android_geo_api_key">AIzaSyAdlcruWlCz36RW3jIxuu4qwsHG74dmTSQ</string>
     <string name="app_name">Ciride Driver</string>
     <string name="defaultFont">fonts/Poppins_Light.ttf</string>
     <string name="demo_text">Note:\nSince this is the demo version, please use below dummy credit/debit card for testing. The actual payment will not be deducted.</string>
