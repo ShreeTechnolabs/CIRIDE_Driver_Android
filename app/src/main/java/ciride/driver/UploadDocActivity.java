@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import com.datepicker.files.SlideDateTimeListener;
 import com.datepicker.files.SlideDateTimePicker;
 import com.general.files.GeneralFunctions;
+import com.general.files.GeneralFunctionsDummy;
 import com.general.files.ImageFilePath;
 import com.general.files.MyApp;
 import com.general.files.OpenSourceSelectionDialog;
@@ -47,6 +48,7 @@ public class UploadDocActivity extends AppCompatActivity {
     MTextView titleTxt;
     ImageView backImgView;
     GeneralFunctions generalFunc;
+    GeneralFunctionsDummy generalFunctionsDummy;
     MButton btn_type2;
     MTextView helpInfoTxtView;
     ImageView dummyInfoCardImgView;
@@ -91,6 +93,7 @@ public class UploadDocActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         generalFunc = MyApp.getInstance().getGeneralFun(getActContext());
+        generalFunctionsDummy = new GeneralFunctionsDummy();
         if (!getIntent().getStringExtra("vimage").equalsIgnoreCase("")) {
             vimage = getIntent().getStringExtra("vimage");
         }
@@ -446,13 +449,13 @@ public class UploadDocActivity extends AppCompatActivity {
             } else if (i == btn_type2.getId()) {
                 checkData();
             } else if (i == helpInfoTxtView.getId() || i == dummyInfoCardImgView.getId()) {
-                if (generalFunc.isCameraStoragePermissionGranted()) {
+                if (generalFunctionsDummy.isCameraStoragePermissionGranted(UploadDocActivity.this)) {
                     openDocChoose();
                 }
             } else if (i == R.id.selectyear_layout) {
                 openDateSelection();
             } else if (i == R.id.editTxtView) {
-                if (generalFunc.isCameraStoragePermissionGranted()) {
+                if (generalFunctionsDummy.isCameraStoragePermissionGranted(UploadDocActivity.this)) {
                     openDocChoose();
                 }
 

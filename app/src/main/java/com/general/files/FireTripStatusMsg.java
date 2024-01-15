@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import ciride.driver.CabRequestedActivity;
-import ciride.driver.ChatActivity;
 
 import com.utils.CabRequestStatus;
 import com.utils.Logger;
@@ -128,40 +127,6 @@ public class FireTripStatusMsg {
 
             if (msgTypeStr.equalsIgnoreCase("CHAT")) {
                 LocalNotification.dispatchLocalNotification(mContext, generalFunc.getJsonValueStr("Msg", obj_msg), true);
-
-
-                if (MyApp.getInstance().getCurrentAct() instanceof ChatActivity == false) {
-
-                    /*Bundle bn = new Bundle();
-
-                    bn.putString("iFromMemberId", generalFunc.getJsonValueStr("iFromMemberId", obj_msg));
-                    bn.putString("FromMemberImageName", generalFunc.getJsonValueStr("FromMemberImageName", obj_msg));
-                    bn.putString("iTripId", generalFunc.getJsonValueStr("iTripId", obj_msg));
-                    bn.putString("FromMemberName", generalFunc.getJsonValueStr("FromMemberName", obj_msg));
-                    bn.putString("vBookingNo", generalFunc.getJsonValueStr("vBookingNo", obj_msg));*/
-
-
-                    Intent chatActInt = new Intent(MyApp.getInstance().getApplicationContext(), ChatActivity.class);
-                    if (obj_msg != null) {
-                        chatActInt.putExtras(generalFunc.createChatBundle(obj_msg));
-                    }
-                    chatActInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                    MyApp.getInstance().getApplicationContext().startActivity(chatActInt);
-                } else if (MyApp.getInstance() != null && MyApp.getInstance().getCurrentAct() instanceof ChatActivity) {
-
-                       /* Bundle bn = new Bundle();
-
-                        bn.putString("iFromMemberId", generalFunc.getJsonValueStr("iFromMemberId", obj_msg));
-                        bn.putString("FromMemberImageName", generalFunc.getJsonValueStr("FromMemberImageName", obj_msg));
-                        bn.putString("iTripId", generalFunc.getJsonValueStr("iTripId", obj_msg));
-                        bn.putString("FromMemberName", generalFunc.getJsonValueStr("FromMemberName", obj_msg));
-                        bn.putString("vBookingNo", generalFunc.getJsonValueStr("vBookingNo", obj_msg));*/
-
-                    ((ChatActivity) MyApp.getInstance().getCurrentAct()).setCurrentTripData(generalFunc.createChatBundle(obj_msg));
-
-                    return;
-                }
             }
 
             //else if (msgTypeStr.equalsIgnoreCase("Notification"))

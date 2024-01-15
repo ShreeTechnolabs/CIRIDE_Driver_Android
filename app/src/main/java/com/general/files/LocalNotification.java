@@ -53,7 +53,16 @@ public class LocalNotification {
                     Intent.FLAG_ACTIVITY_NEW_TASK |
                     Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
         }
-        PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        PendingIntent contentIntent;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            contentIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        } else
+        {
+            contentIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+        }
+
         GeneralFunctions generalFunctions = MyApp.getInstance().getGeneralFun(mContext);
         String userProfileJson = generalFunctions.retrieveValue(Utils.USER_PROFILE_JSON);
 

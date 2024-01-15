@@ -1,6 +1,11 @@
 package com.general.files;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 
 import androidx.work.Constraints;
@@ -12,6 +17,7 @@ import androidx.work.WorkRequest;
 
 import ciride.driver.MainActivity;
 
+import com.InfoProvider;
 import com.utils.CabRequestStatus;
 import com.utils.Utils;
 
@@ -138,13 +144,65 @@ public class ConfigDriverTripStatus implements GetLocationUpdates.LocationUpdate
             int seondsOfDay = calendar.get(Calendar.SECOND);
 
             if (MyApp.isAppInstanceAvailable()) {
-                NotificationScheduler.setReminder(MyApp.getInstance().getApplicationContext(), AlarmReceiver.class, hourOfDay, minutesOfDay, seondsOfDay + FETCH_TRIP_STATUS_TIME_INTERVAL + 5);
+                setReminder(MyApp.getInstance().getApplicationContext(), AlarmReceiver.class, hourOfDay, minutesOfDay, seondsOfDay + FETCH_TRIP_STATUS_TIME_INTERVAL + 5);
             }
 
         } else if (MyApp.isAppInstanceAvailable()) {
-            NotificationScheduler.cancelReminder(MyApp.getInstance().getApplicationContext(), AlarmReceiver.class);
+            cancelReminder(MyApp.getInstance().getApplicationContext(), AlarmReceiver.class);
         }
 
+    }
+
+    public static void setReminder(Context context, Class<?> cls, int hour, int min, int second) {
+        a(context);
+        Calendar var5 = Calendar.getInstance();
+        Calendar var6 = Calendar.getInstance();
+        var6.set(11, hour);
+        var6.set(12, min);
+        var6.set(13, second);
+        cancelReminder(context, cls);
+        if (var6.before(var5)) {
+            var6.add(5, 1);
+        }
+
+        ComponentName var7 = new ComponentName(context, cls);
+        PackageManager var8 = context.getPackageManager();
+        var8.setComponentEnabledSetting(var7, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+        Intent var9 = new Intent(context, cls);
+        PendingIntent var10;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            var10 = PendingIntent.getActivity(context, 100, var9, PendingIntent.FLAG_IMMUTABLE);
+        } else
+        {
+            var10 = PendingIntent.getActivity(context, 100, var9, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+        }
+        AlarmManager var11 = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        var11.setInexactRepeating(AlarmManager.RTC_WAKEUP, var6.getTimeInMillis(), 86400000L, var10);
+    }
+
+    private static void a(Context var0) {
+        new InfoProvider(var0);
+    }
+
+    public static void cancelReminder(Context context, Class<?> cls) {
+        ComponentName var2 = new ComponentName(context, cls);
+        PackageManager var3 = context.getPackageManager();
+        var3.setComponentEnabledSetting(var2, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+        Intent var4 = new Intent(context, cls);
+        PendingIntent var5;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            var5 = PendingIntent.getActivity(context, 100, var4, PendingIntent.FLAG_IMMUTABLE);
+        } else
+        {
+            var5 = PendingIntent.getActivity(context, 100, var4, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+        }
+        AlarmManager var6 = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        var6.cancel(var5);
+        var5.cancel();
     }
 
     public void forceDestroy() {

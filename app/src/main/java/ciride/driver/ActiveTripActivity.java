@@ -57,6 +57,7 @@ import com.general.files.CancelTripDialog;
 import com.general.files.ConfigPubNub;
 import com.general.files.ExecuteWebServerUrl;
 import com.general.files.GeneralFunctions;
+import com.general.files.GeneralFunctionsDummy;
 import com.general.files.GetAddressFromLocation;
 import com.general.files.GetLocationUpdates;
 import com.general.files.ImageFilePath;
@@ -120,6 +121,8 @@ public class ActiveTripActivity extends BaseActivity implements OnMapReadyCallba
     public ImageView emeTapImgView;
     public MTextView timeTxt, distanceTxt;
     GeneralFunctions generalFunc;
+
+    GeneralFunctionsDummy generalFunctionsDummy;
     MTextView titleTxt;
     String tripId = "";
     String eType = "";
@@ -276,6 +279,7 @@ public class ActiveTripActivity extends BaseActivity implements OnMapReadyCallba
 
         animateMarker = new AnimateMarker();
         generalFunc = MyApp.getInstance().getGeneralFun(getActContext());
+        generalFunctionsDummy = new GeneralFunctionsDummy();
         LBL_WAIT = generalFunc.retrieveLangLBl("Wait", "LBL_WAIT");
         animateMarker = new AnimateMarker();
         userProfileJsonObj = generalFunc.getJsonObject(generalFunc.retrieveValue(Utils.USER_PROFILE_JSON));
@@ -3030,11 +3034,11 @@ public class ActiveTripActivity extends BaseActivity implements OnMapReadyCallba
 
     public void takeAndUploadPic(final Context mContext, final String picType) {
 
-        boolean isStoragePermissionAvail = generalFunc.isCameraStoragePermissionGranted();
+        boolean isStoragePermissionAvail = generalFunctionsDummy.isCameraStoragePermissionGranted(mContext);
         if (!isStoragePermissionAvail) {
             return;
         }
-        generalFunc.isCameraStoragePermissionGranted();
+        generalFunctionsDummy.isCameraStoragePermissionGranted(mContext);
         imageType = picType;
         isFrom = "";
         selectedImagePath = "";
@@ -3233,7 +3237,7 @@ public class ActiveTripActivity extends BaseActivity implements OnMapReadyCallba
 
 
             if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-                boolean isStoragePermissionAvail = generalFunc.isCameraStoragePermissionGranted();
+                boolean isStoragePermissionAvail = generalFunctionsDummy.isCameraStoragePermissionGranted(ActiveTripActivity.this);
                 if (!isStoragePermissionAvail) {
                     return;
                 }
@@ -3316,7 +3320,7 @@ public class ActiveTripActivity extends BaseActivity implements OnMapReadyCallba
             } else if (resultCode == RESULT_CANCELED) {
 
             } else if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
-                boolean isStoragePermissionAvail = generalFunc.isCameraStoragePermissionGranted();
+                boolean isStoragePermissionAvail = generalFunctionsDummy.isCameraStoragePermissionGranted(ActiveTripActivity.this);
                 if (isStoragePermissionAvail == false) {
                     return;
                 }
@@ -4318,7 +4322,7 @@ public class ActiveTripActivity extends BaseActivity implements OnMapReadyCallba
                 maskVerificationUploadImgArea.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (generalFunc.isCameraStoragePermissionGranted()) {
+                        if (generalFunctionsDummy.isCameraStoragePermissionGranted(ActiveTripActivity.this)) {
                             isFaceMaskVerification = true;
                             new ImageSourceDialog().run();
                         } else {

@@ -112,11 +112,7 @@ public class AllPermissionsHandleActivity extends AppCompatActivity {
 
 
                 if (!generalFunctions.isAllPermissionGranted(isopenAllowAllDialog ? false : true, requestPermissions)) {
-                    if (isopenAllowAllDialog) {
-                        showNoPermission();
-                    }
-                    return;
-
+                    showNoPermission();
                 }
             }
 

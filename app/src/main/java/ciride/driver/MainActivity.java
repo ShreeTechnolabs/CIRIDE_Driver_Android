@@ -2,10 +2,14 @@ package ciride.driver;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
@@ -62,7 +66,6 @@ import com.general.files.GetLocationUpdates;
 import com.general.files.InternetConnection;
 import com.general.files.MapAnimator;
 import com.general.files.MyApp;
-import com.general.files.NotificationScheduler;
 import com.general.files.OpenAdvertisementDialog;
 import com.general.files.SlideButton;
 import com.general.files.StartActProcess;
@@ -1793,7 +1796,27 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Ge
 
         ConfigPubNub.getInstance().unSubscribeToCabRequestChannel();
 
-        NotificationScheduler.cancelReminder(MyApp.getInstance().getCurrentAct(), AlarmReceiver.class);
+        cancelReminder(AlarmReceiver.class);
+    }
+
+    public void cancelReminder(Class<?> cls) {
+        Context context = MainActivity.this;
+        ComponentName var2 = new ComponentName(context, cls);
+        PackageManager var3 = context.getPackageManager();
+        var3.setComponentEnabledSetting(var2, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+        Intent var4 = new Intent(context, cls);
+        PendingIntent var5;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            var5 = PendingIntent.getActivity(context, 100, var4, PendingIntent.FLAG_IMMUTABLE);
+        } else
+        {
+            var5 = PendingIntent.getActivity(context, 100, var4, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+        }
+        AlarmManager var6 = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        var6.cancel(var5);
+        var5.cancel();
     }
 
     public void setOnlineState() {

@@ -3,11 +3,14 @@ package ciride.driver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,11 +21,20 @@ import com.adapter.files.ChatMessagesRecycleAdapter;
 import com.general.files.ExecuteWebServerUrl;
 import com.general.files.GeneralFunctions;
 import com.general.files.MyApp;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Picasso;
 import com.utils.CommonUtilities;
 import com.utils.Utils;
@@ -31,8 +43,11 @@ import com.view.MTextView;
 import com.view.SelectableRoundedImageView;
 import com.view.simpleratingbar.SimpleRatingBar;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -48,8 +63,6 @@ public class ChatActivity extends AppCompatActivity {
     ProgressBar LoadingProgressBar;
     HashMap<String, String> data_trip_ada;
     GenerateAlertBox generateAlert;
-
-    DatabaseReference dbRef;
     String userProfileJson;
     String driverImgName = "";
 
@@ -60,6 +73,8 @@ public class ChatActivity extends AppCompatActivity {
     ProgressBar progressBar;
     SimpleRatingBar ratingBar;
 
+    private FirebaseFirestore db;
+    private CollectionReference dbCourses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +82,12 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.design_trip_chat_detail_dialog);
         mContext = ChatActivity.this;
 
+        db = FirebaseFirestore.getInstance();
+
+        dbCourses = db.collection("Chat");
+
         generalFunc = MyApp.getInstance().getGeneralFun(ChatActivity.this);
         getDetails();
-
 
         userProfileJson = generalFunc.retrieveValue(Utils.USER_PROFILE_JSON);
         driverImgName = generalFunc.getJsonValue("vImage", userProfileJson);
@@ -77,10 +95,7 @@ public class ChatActivity extends AppCompatActivity {
         data_trip_ada = new HashMap<>();
         data_trip_ada.put("iTripId", getIntent().getStringExtra("iTripId"));
 
-
         initViews();
-
-        dbRef = FirebaseDatabase.getInstance().getReference().child(generalFunc.retrieveValue(Utils.APP_GCM_SENDER_ID_KEY) + "-chat").child(data_trip_ada.get("iTripId") + "-Trip");
 
         chatList = new ArrayList<>();
         count = 0;
@@ -235,21 +250,15 @@ public class ChatActivity extends AppCompatActivity {
                 dataMap.put("driverId", generalFunc.getMemberId());
                 dataMap.put("passengerId", data_trip_ada.get("iFromMemberId"));
                 dataMap.put("vDate", generalFunc.getCurrentDateHourMin());
+                Timestamp currentTimeStamp = Timestamp.now();
+                dataMap.put("timeStamp", currentTimeStamp);
                 dataMap.put("vTimeZone", generalFunc.getTimezone());
+                sendTripMessageNotification(input.getText().toString().trim());
+                input.setText("");
 
-                dbRef.push().setValue(dataMap, (databaseError, databaseReference) -> {
-
-                    if (databaseError != null) {
-
-                    } else {
-                        sendTripMessageNotification(input.getText().toString().trim());
-                        input.setText("");
-                    }
-                });
-
-
-            } else {
-
+                dbCourses.document().set(dataMap)
+                        .addOnSuccessListener(unused -> {})
+                        .addOnFailureListener(e -> {});
             }
 
         });
@@ -262,37 +271,35 @@ public class ChatActivity extends AppCompatActivity {
         chatAdapter.notifyDataSetChanged();
 
 
-        dbRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        Query query = dbCourses.whereEqualTo("iTripId", data_trip_ada.get("iTripId")).orderBy("timeStamp", Query.Direction.ASCENDING);
 
-                if (dataSnapshot.getValue() != null && dataSnapshot.getValue() instanceof HashMap) {
-                    HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
+        query.addSnapshotListener((queryDocumentSnapshots, e) -> {
+            if (e != null) {
+                return;
+            }
+            for (DocumentChange documentChange : queryDocumentSnapshots.getDocumentChanges()) {
+                DocumentSnapshot documentSnapshot = documentChange.getDocument();
+                HashMap<String, Object> dataMap = (HashMap<String, Object>) documentSnapshot.getData();
+                chatList.add(dataMap);
+                chatAdapter.notifyDataSetChanged();
+                chatCategoryRecyclerView.smoothScrollToPosition(chatList.size());
+            }
+        });
+
+        Query query1 = dbCourses.whereEqualTo("iTripId", data_trip_ada.get("iTripId"));
+
+        query1.addSnapshotListener((queryDocumentSnapshots, e) -> {
+            if (e != null) {
+                return;
+            }
+            for (DocumentChange documentChange : queryDocumentSnapshots.getDocumentChanges()) {
+                DocumentSnapshot documentSnapshot = documentChange.getDocument();
+                HashMap<String, Object> dataMap = (HashMap<String, Object>) documentSnapshot.getData();
+                if (!chatList.contains(dataMap)){
                     chatList.add(dataMap);
-
                     chatAdapter.notifyDataSetChanged();
-                    chatCategoryRecyclerView.scrollToPosition(chatList.size() - 1);
+                    chatCategoryRecyclerView.smoothScrollToPosition(chatList.size());
                 }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -312,6 +319,7 @@ public class ChatActivity extends AppCompatActivity {
         ExecuteWebServerUrl exeWebServer = new ExecuteWebServerUrl(mContext, parameters);
         exeWebServer.setLoaderConfig(mContext, false, generalFunc);
         exeWebServer.setDataResponseListener(responseString -> {
+           String  setDataRes = responseString;
         });
         exeWebServer.execute();
     }
