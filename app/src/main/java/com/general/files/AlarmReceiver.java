@@ -25,7 +25,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 //        NotificationScheduler.showNotification(context, MainActivity.class, "",
 //                generalFunctions.retrieveLangLBl("", "LBL_APP_INACTIVE_STATE_ALERT_NOTIFICATION"));
 
-        LocalNotification.dispatchLocalNotification(context, generalFunctions.retrieveLangLBl("", "LBL_APP_INACTIVE_STATE_ALERT_NOTIFICATION"), true);
+        LocalNotification.dispatchLocalNotification(context, generalFunctions.retrieveLangLBl("", "LBL_APP_INACTIVE_STATE_ALERT_NOTIFICATION"), null, true);
 
     }
 }

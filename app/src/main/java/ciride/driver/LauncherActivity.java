@@ -65,11 +65,13 @@ public class LauncherActivity extends BaseActivity implements ProviderInstaller.
     String response_str_autologin = "";
     private  static ArrayList<String> requestPermissions = new ArrayList<>();
 
-
+    public static Boolean forwardToChat = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
+
+        forwardToChat = getIntent().getBooleanExtra("ForwardToChat", false);
 
         //requestPermissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
       //  requestPermissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);

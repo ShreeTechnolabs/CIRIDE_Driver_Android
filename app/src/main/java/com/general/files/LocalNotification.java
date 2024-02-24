@@ -19,6 +19,8 @@ import ciride.driver.BuildConfig;
 import ciride.driver.R;
 import com.utils.Utils;
 
+import java.util.Random;
+
 /**
  * Created by Admin on 20/03/18.
  */
@@ -29,25 +31,35 @@ public class LocalNotification {
     private static String CHANNEL_ID = BuildConfig.APPLICATION_ID;
     private static NotificationManager mNotificationManager = null;
 
-    public static void dispatchLocalNotification(Context context, String message, boolean onlyInBackground) {
+    public static void dispatchLocalNotification(Context context, String message, String title, boolean onlyInBackground) {
         mContext = context;
+
+        String title1 = title;
+        boolean ForwardToChat;
+        if (title == null){
+            title1 = mContext.getString(R.string.app_name);
+            ForwardToChat = false;
+        } else  {
+            ForwardToChat = true;
+        }
 
         if (MyApp.getInstance().getCurrentAct() == null && mContext == null) {
             return;
         }
-
-        continueDispatchNotification(message, onlyInBackground);
+        continueDispatchNotification(message, title1, onlyInBackground, ForwardToChat);
 
     }
 
-    private static void continueDispatchNotification(String message, boolean onlyInBackground) {
+    private static void continueDispatchNotification(String message, String title, boolean onlyInBackground, Boolean ForwardToChat) {
         Intent intent = null;
         if (Utils.getPreviousIntent(mContext) != null) {
             intent = Utils.getPreviousIntent(mContext);
+            intent.putExtra("ForwardToChat", ForwardToChat);
         } else {
             intent = mContext
                     .getPackageManager()
                     .getLaunchIntentForPackage(mContext.getPackageName());
+            intent.putExtra("ForwardToChat", ForwardToChat);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
                     Intent.FLAG_ACTIVITY_NEW_TASK |
@@ -110,7 +122,7 @@ public class LocalNotification {
             // mBuilder.setChannelId(BuildConfig.APPLICATION_ID);
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
-                    mContext.getString(R.string.app_name),
+                    title,
                     NotificationManager.IMPORTANCE_HIGH
             );
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -127,7 +139,7 @@ public class LocalNotification {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_stat_driver_logo)
                 .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher))
-                .setContentTitle(mContext.getString(R.string.app_name))
+                .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
                // .setSound(soundUri)
@@ -136,15 +148,18 @@ public class LocalNotification {
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
 
+        Random random = new Random();
+
+        int randomNumber = random.nextInt();
 
 
         if (onlyInBackground && MyApp.getInstance().isMyAppInBackGround()) {
 //            mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.notify(Utils.NOTIFICATION_ID, mBuilder.build());
+            mNotificationManager.notify(randomNumber, mBuilder.build());
             playNotificationSound(soundUri);
         } else if (!onlyInBackground) {
 //            mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.notify(Utils.NOTIFICATION_ID, mBuilder.build());
+            mNotificationManager.notify(randomNumber, mBuilder.build());
             playNotificationSound(soundUri);
         }
 

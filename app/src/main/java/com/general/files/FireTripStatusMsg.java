@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import ciride.driver.CabRequestedActivity;
+import ciride.driver.ChatActivity;
 
 import com.utils.CabRequestStatus;
 import com.utils.Logger;
@@ -93,7 +94,7 @@ public class FireTripStatusMsg {
 
         if (!GeneralFunctions.isJsonObj(finalMsg)) {
             String passMessage = generalFunc.convertNumberWithRTL(message);
-            LocalNotification.dispatchLocalNotification(mContext, passMessage, true);
+            LocalNotification.dispatchLocalNotification(mContext, passMessage, null,true);
             generalFunc.showGeneralMessage("", passMessage);
             return;
         }
@@ -122,17 +123,31 @@ public class FireTripStatusMsg {
         if (messageStr.equals("")) {
 
             String msgTypeStr = generalFunc.getJsonValueStr("MsgType", obj_msg);
+            String msgSender = generalFunc.getJsonValueStr("FromMemberName", obj_msg);
             String messageType_str = generalFunc.getJsonValueStr("MessageType", obj_msg);
             String vTitle = generalFunc.convertNumberWithRTL(generalFunc.getJsonValueStr("vTitle", obj_msg));
 
             if (msgTypeStr.equalsIgnoreCase("CHAT")) {
-                LocalNotification.dispatchLocalNotification(mContext, generalFunc.getJsonValueStr("Msg", obj_msg), true);
+                LocalNotification.dispatchLocalNotification(mContext, generalFunc.getJsonValueStr("Msg", obj_msg), msgSender,true);
+
+                if (MyApp.getInstance().getCurrentAct() instanceof ChatActivity == false) {
+
+                    Intent chatActInt = new Intent(MyApp.getInstance().getApplicationContext(), ChatActivity.class);
+                    if (obj_msg != null) {
+                        chatActInt.putExtras(generalFunc.createChatBundle(obj_msg));
+                    }
+                    chatActInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    MyApp.getInstance().getApplicationContext().startActivity(chatActInt);
+                } else if (MyApp.getInstance() != null && MyApp.getInstance().getCurrentAct() instanceof ChatActivity) {
+                    return;
+                }
             }
 
             //else if (msgTypeStr.equalsIgnoreCase("Notification"))
             else
             {
-                LocalNotification.dispatchLocalNotification(mContext, vTitle, true);
+                LocalNotification.dispatchLocalNotification(mContext, vTitle, null,true);
 
                 final GenerateAlertBox generateAlert = new GenerateAlertBox(mContext);
                 generateAlert.setCancelable(false);
@@ -172,7 +187,7 @@ public class FireTripStatusMsg {
 
             }
             else {
-                LocalNotification.dispatchLocalNotification(mContext, vTitle, false);
+                LocalNotification.dispatchLocalNotification(mContext, vTitle, null,false);
             }
 
         }
@@ -197,14 +212,14 @@ public class FireTripStatusMsg {
 
         if (generalFunc.getJsonValue("REQUEST_TYPE", message) != null) {
             if (generalFunc.getJsonValue("REQUEST_TYPE", message).equalsIgnoreCase(Utils.CabGeneralType_Ride)) {
-                LocalNotification.dispatchLocalNotification(mContext, generalFunc.retrieveLangLBl("", "LBL_TRIP_USER_WAITING"), true);
+                LocalNotification.dispatchLocalNotification(mContext, generalFunc.retrieveLangLBl("", "LBL_TRIP_USER_WAITING"), null,true);
             } else if (generalFunc.getJsonValue("REQUEST_TYPE", message).equalsIgnoreCase(Utils.CabGeneralType_UberX)) {
-                LocalNotification.dispatchLocalNotification(mContext, generalFunc.retrieveLangLBl("", "LBL_USER_WAITING"), true);
+                LocalNotification.dispatchLocalNotification(mContext, generalFunc.retrieveLangLBl("", "LBL_USER_WAITING"), null,true);
             } else {
-                LocalNotification.dispatchLocalNotification(mContext, generalFunc.retrieveLangLBl("", "LBL_DELIVERY_SENDER_WAITING"), true);
+                LocalNotification.dispatchLocalNotification(mContext, generalFunc.retrieveLangLBl("", "LBL_DELIVERY_SENDER_WAITING"), null,true);
             }
         } else {
-            LocalNotification.dispatchLocalNotification(mContext, generalFunc.retrieveLangLBl("", "LBL_TRIP_USER_WAITING"), true);
+            LocalNotification.dispatchLocalNotification(mContext, generalFunc.retrieveLangLBl("", "LBL_TRIP_USER_WAITING"), null,true);
         }
 
         generalFunc.storeData(Utils.DRIVER_ACTIVE_REQ_MSG_KEY, message);
@@ -235,7 +250,7 @@ public class FireTripStatusMsg {
 
 
             if (!GeneralFunctions.isJsonObj(message)) {
-                LocalNotification.dispatchLocalNotification(mLocContext, message, true);
+                LocalNotification.dispatchLocalNotification(mLocContext, message, null,true);
 
                 return;
             }
@@ -249,10 +264,10 @@ public class FireTripStatusMsg {
                 switch (msgType_str) {
                     case "CHAT":
                         generalFunc.storeData("OPEN_CHAT", obj_msg.toString());
-                        LocalNotification.dispatchLocalNotification(mLocContext, generalFunc.getJsonValueStr("Msg", obj_msg), false);
+                        LocalNotification.dispatchLocalNotification(mLocContext, generalFunc.getJsonValueStr("Msg", obj_msg), generalFunc.getJsonValueStr("FromMemberName", obj_msg),false);
                         break;
                     default:
-                        LocalNotification.dispatchLocalNotification(mLocContext, generalFunc.getJsonValueStr("vTitle", obj_msg), false);
+                        LocalNotification.dispatchLocalNotification(mLocContext, generalFunc.getJsonValueStr("vTitle", obj_msg), null,false);
                 }
 
 
@@ -262,14 +277,14 @@ public class FireTripStatusMsg {
 
                     case "TripCancelled":
                         generalFunc.saveGoOnlineInfo();
-                        LocalNotification.dispatchLocalNotification(mLocContext, title_msg, false);
+                        LocalNotification.dispatchLocalNotification(mLocContext, title_msg, null,false);
                         break;
                     case "OrderCancelByAdmin":
                         generalFunc.saveGoOnlineInfo();
-                        LocalNotification.dispatchLocalNotification(mLocContext, title_msg, false);
+                        LocalNotification.dispatchLocalNotification(mLocContext, title_msg, null,false);
                         break;
                     case "DestinationAdded":
-                        LocalNotification.dispatchLocalNotification(mLocContext, title_msg, false);
+                        LocalNotification.dispatchLocalNotification(mLocContext, title_msg, null,false);
                         break;
                     case "CabRequested":
                         dispatchCabRequest(generalFunc, message);
@@ -328,7 +343,7 @@ public class FireTripStatusMsg {
                     String data = generalFunc.retrieveValue(key);
 
                     if (data.equals("")) {
-                        LocalNotification.dispatchLocalNotification(mContext, vTitle, true);
+                        LocalNotification.dispatchLocalNotification(mContext, vTitle, null,true);
                         if (time.equals("")) {
 
 
